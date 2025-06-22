@@ -1,0 +1,67 @@
+---
+// src/components/SpaceCard.astro
+export interface Props {
+  title: string;
+  description: string;
+  href: string;
+  icon: string;
+  tagline: string;
+  color: 'yellow' | 'orange' | 'red';
+  delay?: string;
+}
+
+const { title, description, href, icon, tagline, color, delay = '0s' } = Astro.props;
+
+// Mapeo de colores a clases CSS
+const colorClasses = {
+  yellow: {
+    card: 'space-card-makerspace',
+    icon: 'icon-float-makerspace',
+    text: 'text-curahi-yellow',
+    iconColor: 'text-curahi-yellow',
+    hoverBg: 'group-hover:bg-curahi-yellow/40'
+  },
+  orange: {
+    card: 'space-card-devspace', 
+    icon: 'icon-float-devspace',
+    text: 'text-curahi-orange',
+    iconColor: 'text-curahi-orange',
+    hoverBg: 'group-hover:bg-curahi-orange/40'
+  },
+  red: {
+    card: 'space-card-eduspace',
+    icon: 'icon-float-eduspace', 
+    text: 'text-curahi-red',
+    iconColor: 'text-curahi-red',
+    hoverBg: 'group-hover:bg-curahi-red/40'
+  }
+};
+
+const classes = colorClasses[color];
+---
+
+<a href={href} class="group block">
+    <div class={`space-card relative p-10 rounded-3xl ${classes.card} hover-lift glass-effect`}>
+        <div class={`absolute top-8 right-8 icon-float ${classes.icon}`} style={`animation-delay: ${delay};`}>
+            <svg class={`w-10 h-10 ${classes.iconColor}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={icon}></path>
+            </svg>
+        </div>
+        
+        <div class="mb-8">
+            <h3 class={`text-4xl font-bold ${classes.text} mb-4`}>{title}</h3>
+            <p class="text-white/90 text-lg leading-relaxed">
+                {description}
+            </p>
+        </div>
+        
+        <div class="flex items-center justify-between">
+            <span class={`${classes.text}/80 font-medium`}>{tagline}</span>
+            <div class={`w-8 h-8 bg-${color === 'yellow' ? 'curahi-yellow' : color === 'orange' ? 'curahi-orange' : 'curahi-red'}/20 rounded-full flex items-center justify-center ${classes.hoverBg} transition-colors`}>
+                <svg class={`w-4 h-4 ${classes.iconColor}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </div>
+        </div>
+    </div>
+</a>

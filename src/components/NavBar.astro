@@ -1,0 +1,177 @@
+---
+// src/components/Navbar.astro
+
+// Detectar la página actual
+const currentPath = Astro.url.pathname;
+const isHomePage = currentPath === '/' || currentPath === '';
+---
+
+<nav class="navbar-fixed glass-effect">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20">
+            <!-- Logo -->
+            <a href="/" class="flex items-center space-x-3 group">
+                <div class="relative">
+                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center gradient-bg animate-pulse-glow group-hover:scale-110 transition-transform duration-300">
+                        <div class="w-6 h-6 bg-white rounded-full opacity-80"></div>
+                    </div>
+                </div>
+                <span class="text-2xl font-black gradient-text">Cuarahí</span>
+            </a>
+            
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex space-x-8">
+                <!-- Dropdown de Espacios -->
+                <div class="relative group">
+                    <button class="nav-link flex items-center space-x-1">
+                        <span>Espacios</span>
+                        <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    
+                    <!-- Dropdown Menu -->
+                    <div class="absolute top-full left-0 mt-2 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                        <div class="glass-effect-dark rounded-2xl shadow-2xl overflow-hidden border border-white/20">
+                            <a href="/makerspace" class="block px-6 py-4 text-white/90 hover:text-yellow-400 hover:bg-white/5 transition-colors border-b border-white/10">
+                                <div class="flex items-center space-x-3">
+                                    <div class="icon-float-makerspace w-8 h-8 rounded-lg flex items-center justify-center">
+                                        <svg class="w-4 h-4 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <div class="font-semibold">MakerSpace</div>
+                                        <div class="text-sm text-white/60">Laboratorio de fabricación</div>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="/devspace" class="block px-6 py-4 text-white/90 hover:text-orange-400 hover:bg-white/5 transition-colors border-b border-white/10">
+                                <div class="flex items-center space-x-3">
+                                    <div class="icon-float-devspace w-8 h-8 rounded-lg flex items-center justify-center">
+                                        <svg class="w-4 h-4 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <div class="font-semibold">DevSpace</div>
+                                        <div class="text-sm text-white/60">Desarrollo y consultoría</div>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="/eduspace" class="block px-6 py-4 text-white/90 hover:text-red-400 hover:bg-white/5 transition-colors border-b border-white/10">
+                                <div class="flex items-center space-x-3">
+                                    <div class="icon-float-eduspace w-8 h-8 rounded-lg flex items-center justify-center">
+                                        <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <div class="font-semibold">EduSpace</div>
+                                        <div class="text-sm text-white/60">Educación peer-to-peer</div>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="px-6 py-4 bg-white/5">
+                                <a href="/#espacios" class="text-sm font-medium gradient-text hover:opacity-80 transition-opacity">
+                                    Ver todos los espacios →
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <a href={isHomePage ? "#sobre-nosotros" : "/#sobre-nosotros"} class="nav-link">
+                    Nosotros
+                </a>
+                <a href={isHomePage ? "#contacto" : "/#contacto"} class="nav-link">
+                    Contacto
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden p-2 rounded-lg glass-effect hover:bg-white/10 transition-colors" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menú móvil">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden hidden">
+        <div class="px-4 pt-2 pb-6 space-y-4 glass-effect-dark">
+            <!-- Mobile Espacios Section -->
+            <div class="border-b border-white/10 pb-4">
+                <div class="text-sm font-semibold gradient-text mb-3">Espacios</div>
+                <div class="space-y-2 pl-4">
+                    <a href="/makerspace" class="block text-white/90 hover:text-yellow-400 transition-colors py-1">
+                        MakerSpace
+                    </a>
+                    <a href="/devspace" class="block text-white/90 hover:text-orange-400 transition-colors py-1">
+                        DevSpace
+                    </a>
+                    <a href="/eduspace" class="block text-white/90 hover:text-red-400 transition-colors py-1">
+                        EduSpace
+                    </a>
+                    <a href={isHomePage ? "#espacios" : "/#espacios"} class="block text-sm gradient-text opacity-80 hover:opacity-100 transition-opacity py-1">
+                        Ver todos →
+                    </a>
+                </div>
+            </div>
+            
+            <a href={isHomePage ? "#sobre-nosotros" : "/#sobre-nosotros"} class="block nav-link text-lg py-2">
+                Nosotros
+            </a>
+            <a href={isHomePage ? "#contacto" : "/#contacto"} class="block nav-link text-lg py-2">
+                Contacto
+            </a>
+        </div>
+    </div>
+</nav>
+
+<script>
+    // Mobile menu functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        let isOpen = false;
+
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', function() {
+                isOpen = !isOpen;
+                mobileMenuButton.setAttribute('aria-expanded', String(isOpen));
+
+                if (isOpen) {
+                    mobileMenu.classList.remove('hidden');
+                    mobileMenu.classList.add('animate-slide-up');
+                } else {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.remove('animate-slide-up');
+                }
+            });
+
+            // Close mobile menu when clicking on links
+            const mobileLinks = mobileMenu.querySelectorAll('a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    isOpen = false;
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.remove('animate-slide-up');
+                });
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', (e: MouseEvent) => {
+                const target = e.target as Node;
+                if (!mobileMenuButton.contains(target) && !mobileMenu.contains(target)) {
+                    if (isOpen) {
+                        isOpen = false;
+                        mobileMenu.classList.add('hidden');
+                        mobileMenu.classList.remove('animate-slide-up');
+                    }
+                }
+            });
+        }
+    });
+</script>

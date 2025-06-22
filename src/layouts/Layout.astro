@@ -1,0 +1,192 @@
+---
+// src/layouts/Layout.astro
+import '../styles/global.css';
+
+export interface Props {
+  title: string;
+  description?: string;
+  keywords?: string;
+}
+
+const { 
+  title, 
+  description = "Cuarahí - Donde las Ideas Cobran Vida", 
+  keywords = "makerspace, devspace, eduspace, innovación, tecnología, Bolivia" 
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title}</title>
+    <meta name="description" content={description}>
+    <meta name="keywords" content={keywords}>
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content={title}>
+    <meta property="og:description" content={description}>
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_ES">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content={title}>
+    <meta name="twitter:description" content={description}>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={Astro.url.href}>
+
+    <!-- Preconnect y preload de fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"></noscript>
+</head>
+
+<body>
+    <slot />
+    
+    <script>
+        // Funcionalidades globales con parallax controlado
+        document.addEventListener('DOMContentLoaded', function() {
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            // Smooth scrolling para enlaces internos
+            const links = document.querySelectorAll('a[href^="#"]');
+            
+            links.forEach(link => {
+                link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const href = (e.currentTarget as HTMLAnchorElement).getAttribute('href')!;
+                const target = document.querySelector<HTMLElement>(href);
+                    if (target) {
+                        const offsetTop = target.offsetTop - 80;
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Intersection Observer para animaciones
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                    }
+                });
+            }, observerOptions);
+
+            // Observar elementos con clase reveal-element
+            const revealElements = document.querySelectorAll('.reveal-element');
+            revealElements.forEach(el => observer.observe(el));
+
+            // Navbar transparency effect
+            const nav = document.querySelector('nav');
+            if (nav) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 100) {
+                        nav.classList.add('glass-effect-dark');
+                        nav.classList.remove('glass-effect');
+                    } else {
+                        nav.classList.add('glass-effect');
+                        nav.classList.remove('glass-effect-dark');
+                    }
+                });
+            }
+
+            if (!prefersReducedMotion) {
+                // PARALLAX MEJORADO Y CONTROLADO para Hero
+                const parallaxElements = {
+                    slow: document.querySelectorAll<HTMLElement>('.parallax-bg-slow'),
+                    medium: document.querySelectorAll<HTMLElement>('.parallax-bg-medium'),
+                    fast: document.querySelectorAll<HTMLElement>('.parallax-bg-fast'),
+                    content: document.querySelectorAll<HTMLElement>('.parallax-content'),
+                    waves: document.querySelectorAll<HTMLElement>('.parallax-waves'),
+                };
+
+            let ticking = false;
+
+            function updateParallax() {
+                const scrolled = window.pageYOffset;
+                const heroSection = document.querySelector<HTMLElement>('.hero-section');
+                
+                if (heroSection) {
+                    const heroRect = heroSection.getBoundingClientRect();
+                    const heroHeight = heroSection.offsetHeight;
+                    
+                    // Solo aplicar parallax cuando el hero está visible
+                    if (heroRect.bottom > 0 && heroRect.top < window.innerHeight) {
+                        const scrollProgress = Math.min(scrolled / heroHeight, 1);
+                        
+                        // Parallax suave para elementos de fondo (se mueven hacia arriba lentamente)
+                        parallaxElements.slow.forEach(el => {
+                            const speed = -0.1; // Muy lento, hacia arriba
+                            el.style.transform = `translateY(${scrolled * speed}px)`;
+                        });
+                        
+                        // Parallax medio para elementos decorativos
+                        parallaxElements.medium.forEach(el => {
+                            const speed = -0.2; // Lento-medio, hacia arriba
+                            el.style.transform = `translateY(${scrolled * speed}px)`;
+                        });
+                        
+                        // Parallax rápido para partículas flotantes
+                        parallaxElements.fast.forEach(el => {
+                            const speed = -0.35; // Medio-rápido, hacia arriba
+                            el.style.transform = `translateY(${scrolled * speed}px)`;
+                        });
+                        
+                        // Parallax inverso para el contenido (se mueve hacia abajo lentamente)
+                        parallaxElements.content.forEach(el => {
+                            const speed = 0.05; // Muy lento, hacia abajo para efecto profundidad
+                            el.style.transform = `translateY(${scrolled * speed}px)`;
+                        });
+                        
+                        // Ondas de conexión que fluyen hacia SpacesSection
+                        parallaxElements.waves.forEach(el => {
+                        const speed = 0.15;
+                        const opacity = Math.max(0.3, 1 - scrollProgress * 0.7);
+                        el.style.transform = `translateY(${scrolled * speed}px)`;
+                        el.style.opacity = `${opacity}`;
+                        });
+                    } else {
+                        // Resetear transformaciones si el hero no está visible
+                        Object.values(parallaxElements).forEach(group => {
+                            group.forEach(el => {
+                                el.style.transform = 'translateY(0)';
+                                el.style.opacity = '1';
+                            });
+                        });
+                    }
+                }
+                
+                ticking = false;
+            }
+
+            function requestParallaxUpdate() {
+                if (!ticking) {
+                    requestAnimationFrame(updateParallax);
+                    ticking = true;
+                }
+            }
+
+            // Escuchar scroll con throttling para performance
+            window.addEventListener('scroll', requestParallaxUpdate, { passive: true });
+            }
+        });
+    </script>
+</body>
+</html>

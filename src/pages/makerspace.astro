@@ -1,0 +1,471 @@
+---
+// src/pages/makerspace.astro
+import Layout from '../layouts/Layout.astro';
+import NavBar from '../components/NavBar.astro';
+import Footer from '../components/Footer.astro';
+
+const pageTitle = "MakerSpace - Cuarahí | Laboratorio de Fabricación Digital";
+const pageDescription = "Accede a impresoras 3D, herramientas de prototipado y tecnología de vanguardia en nuestro MakerSpace. Talleres gratuitos y equipamiento profesional.";
+const keywords = "makerspace, impresión 3D, prototipado, fabricación digital, talleres, laboratorio, maker, DIY, Trinidad, Bolivia";
+
+const equipmentList = [
+    {
+        name: "Impresoras 3D FDM",
+        description: "Prusa i3 MK3S+ y Ender 3 V2 para prototipado rápido",
+        icon: "M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
+    },
+    {
+        name: "Impresora 3D Resina",
+        description: "Elegoo Mars 3 Pro para detalles de alta precisión",
+        icon: "M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+    },
+    {
+        name: "Cortadora Láser",
+        description: "Para corte de acrílico, madera y grabado de precisión",
+        icon: "M13 10V3L4 14h7v7l9-11h-7z"
+    },
+    {
+        name: "Estación de Soldadura",
+        description: "Herramientas profesionales para electrónica y circuitos",
+        icon: "M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"
+    },
+    {
+        name: "Arduino & Raspberry Pi",
+        description: "Microcontroladores y computadoras de placa única",
+        icon: "M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"
+    },
+    {
+        name: "Herramientas Manuales",
+        description: "Taladros, sierras, multiherramientas y instrumentos de medición",
+        icon: "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+    }
+];
+
+const workshops = [
+    {
+        title: "Introducción a la Impresión 3D",
+        date: "25 Jun, 2025",
+        time: "18:00 - 21:00",
+        instructor: "Carlos Mendoza",
+        level: "Principiante",
+        spots: "8 cupos disponibles"
+    },
+    {
+        title: "Electrónica con Arduino",
+        date: "28 Jun, 2025", 
+        time: "14:00 - 17:00",
+        instructor: "Ana Rivera",
+        level: "Intermedio",
+        spots: "6 cupos disponibles"
+    },
+    {
+        title: "Diseño CAD para Makers",
+        date: "2 Jul, 2025",
+        time: "19:00 - 22:00", 
+        instructor: "María González",
+        level: "Principiante",
+        spots: "10 cupos disponibles"
+    }
+];
+
+const testimonials = [
+    {
+        name: "Pedro Ramírez",
+        role: "Estudiante de Ingeniería Mecánica",
+        comment: "El MakerSpace me permitió crear el prototipo de mi proyecto de grado. El acceso a las impresoras 3D y la ayuda del equipo fueron fundamentales.",
+        rating: 5
+    },
+    {
+        name: "Sofia López", 
+        role: "Emprendedora Tech",
+        comment: "Desarrollé mi primera PCB aquí. Las herramientas de electrónica son de nivel profesional y el ambiente colaborativo es increíble.",
+        rating: 5
+    }
+];
+---
+
+<Layout 
+    title={pageTitle} 
+    description={pageDescription}
+    keywords={keywords}
+>
+    <NavBar />
+    
+    <!-- Hero MakerSpace -->
+    <section class="hero-section relative flex items-center justify-center bg-gradient-to-br from-curahi-yellow via-curahi-orange to-curahi-red noise-texture">
+        <div class="absolute inset-0 bg-curahi-dark/40"></div>
+        
+        <!-- Elementos decorativos específicos del MakerSpace -->
+        <div class="absolute top-20 left-10 w-24 h-24 bg-curahi-yellow/20 rounded-full blur-xl animate-float"></div>
+        <div class="absolute bottom-20 right-10 w-32 h-32 bg-curahi-orange/20 rounded-full blur-xl animate-float" style="animation-delay: -3s;"></div>
+        <div class="absolute top-1/2 left-1/4 w-16 h-16 bg-curahi-yellow/30 rounded-full blur-xl animate-float" style="animation-delay: -6s;"></div>
+        
+        <div class="relative z-10 text-center max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="reveal-element">
+                <!-- Icono del MakerSpace -->
+                <div class="w-24 h-24 mx-auto mb-8 bg-curahi-yellow/20 rounded-3xl flex items-center justify-center animate-pulse-glow">
+                    <svg class="w-12 h-12 text-curahi-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+                    </svg>
+                </div>
+                
+                <h1 class="text-5xl md:text-7xl font-black text-white mb-6 leading-tight">
+                    <span class="text-curahi-yellow">Maker</span>Space
+                </h1>
+                
+                <h2 class="text-2xl md:text-4xl font-bold text-white/90 mb-8 leading-relaxed">
+                    Donde las <span class="text-curahi-yellow">Ideas</span> se Vuelven <span class="text-curahi-yellow">Realidad</span>
+                </h2>
+                
+                <p class="text-xl md:text-2xl mb-12 text-white/80 max-w-4xl mx-auto leading-relaxed">
+                    Laboratorio de fabricación digital equipado con impresoras 3D, cortadora láser, 
+                    herramientas de electrónica y todo lo que necesitas para prototipar tus proyectos.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                    <a href="#registro" class="px-12 py-4 bg-curahi-yellow text-curahi-dark font-bold text-xl rounded-2xl hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-curahi-yellow/50">
+                        Registrarse Ahora
+                    </a>
+                    <a href="#equipamiento" class="px-12 py-4 border-2 border-white/40 text-white font-semibold text-xl rounded-2xl hover:bg-white/10 transition-all duration-300 glass-effect">
+                        Ver Equipamiento
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Beneficios del MakerSpace -->
+    <section class="py-24 bg-curahi-navy">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-20 reveal-element">
+                <h2 class="text-4xl md:text-6xl font-bold text-white mb-6">
+                    ¿Por qué elegir nuestro <span class="text-curahi-yellow">MakerSpace</span>?
+                </h2>
+                <p class="text-xl text-white/80 max-w-3xl mx-auto">
+                    Un ecosistema completo para makers, inventores y creativos de todos los niveles
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-10">
+                <div class="reveal-element bg-curahi-yellow/10 p-8 rounded-3xl border border-curahi-yellow/30 hover-lift">
+                    <div class="w-16 h-16 bg-curahi-yellow/20 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-curahi-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-curahi-yellow mb-4">Acceso 24/7</h3>
+                    <p class="text-white/90 leading-relaxed">
+                        Trabaja en tus proyectos cuando te convenga. Nuestro laboratorio está disponible 
+                        las 24 horas para miembros registrados.
+                    </p>
+                </div>
+
+                <div class="reveal-element bg-curahi-orange/10 p-8 rounded-3xl border border-curahi-orange/30 hover-lift">
+                    <div class="w-16 h-16 bg-curahi-orange/20 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-curahi-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-curahi-orange mb-4">Talleres Gratuitos</h3>
+                    <p class="text-white/90 leading-relaxed">
+                        Aprende nuevas habilidades con nuestros talleres semanales. Desde básicos 
+                        hasta técnicas avanzadas de fabricación.
+                    </p>
+                </div>
+
+                <div class="reveal-element bg-curahi-red/10 p-8 rounded-3xl border border-curahi-red/30 hover-lift">
+                    <div class="w-16 h-16 bg-curahi-red/20 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-curahi-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-curahi-red mb-4">Comunidad Activa</h3>
+                    <p class="text-white/90 leading-relaxed">
+                        Conecta con otros makers, comparte conocimientos y colabora en proyectos 
+                        innovadores junto a la comunidad.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Equipamiento -->
+    <section id="equipamiento" class="py-24 bg-curahi-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-20 reveal-element">
+                <h2 class="text-4xl md:text-6xl font-bold text-white mb-6">
+                    Equipamiento <span class="text-curahi-yellow">Profesional</span>
+                </h2>
+                <p class="text-xl text-white/80 max-w-3xl mx-auto">
+                    Herramientas de última generación para llevar tus ideas del concepto a la realidad
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {equipmentList.map((equipment, index) => (
+                    <div class="reveal-element bg-curahi-navy/50 p-8 rounded-3xl glass-effect hover-lift group">
+                        <div class="w-16 h-16 bg-curahi-yellow/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <svg class="w-8 h-8 text-curahi-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={equipment.icon}></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">{equipment.name}</h3>
+                        <p class="text-white/70 leading-relaxed">{equipment.description}</p>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+        <!-- Próximos Talleres -->
+    <section class="py-24 bg-curahi-navy">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-20 reveal-element">
+                <h2 class="text-4xl md:text-6xl font-bold text-white mb-6">
+                    Próximos <span class="text-curahi-yellow">Talleres</span>
+                </h2>
+                <p class="text-xl text-white/80 max-w-3xl mx-auto">
+                    Aprende nuevas habilidades con expertos de la industria. Todos los talleres son gratuitos para miembros.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                {workshops.map((workshop, index) => (
+                    <div class="reveal-element bg-gradient-to-br from-curahi-yellow/10 to-curahi-orange/10 p-8 rounded-3xl border border-curahi-yellow/30 hover-lift group">
+                        <div class="flex justify-between items-start mb-6">
+                            <div class="w-12 h-12 bg-curahi-yellow/20 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-curahi-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                </svg>
+                            </div>
+                            <span class="px-3 py-1 bg-curahi-yellow/20 text-curahi-yellow text-sm font-medium rounded-full">
+                                {workshop.level}
+                            </span>
+                        </div>
+                        
+                        <h3 class="text-xl font-bold text-curahi-yellow mb-3">{workshop.title}</h3>
+                        
+                        <div class="space-y-2 mb-6 text-white/80">
+                            <div class="flex items-center space-x-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                                <span>{workshop.date}</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <span>{workshop.time}</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                </svg>
+                                <span>{workshop.instructor}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-curahi-yellow/80">{workshop.spots}</span>
+                            <button class="px-6 py-2 bg-curahi-yellow/20 text-curahi-yellow font-semibold rounded-lg hover:bg-curahi-yellow/30 transition-colors">
+                                Reservar
+                            </button>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonios -->
+    <section class="py-24 bg-curahi-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-20 reveal-element">
+                <h2 class="text-4xl md:text-6xl font-bold text-white mb-6">
+                    Lo que dicen nuestros <span class="text-curahi-yellow">Makers</span>
+                </h2>
+                <p class="text-xl text-white/80">
+                    Historias reales de proyectos exitosos creados en nuestro MakerSpace
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+                {testimonials.map((testimonial) => (
+                    <div class="reveal-element bg-curahi-navy/50 p-8 rounded-3xl glass-effect hover-lift">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-curahi-yellow to-curahi-orange rounded-full flex items-center justify-center text-2xl font-bold text-curahi-dark mr-4">
+                                {testimonial.name.charAt(0)}
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-white">{testimonial.name}</h4>
+                                <p class="text-curahi-yellow">{testimonial.role}</p>
+                            </div>
+                        </div>
+                        <p class="text-white/90 text-lg leading-relaxed mb-4">
+                            "{testimonial.comment}"
+                        </p>
+                        <div class="flex text-curahi-yellow">
+                            {Array.from({ length: testimonial.rating }, (_, i) => (
+                                <span>★</span>
+                            ))}
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <!-- Registro/CTA -->
+    <section id="registro" class="py-24 bg-gradient-to-br from-curahi-yellow via-curahi-orange to-curahi-red">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="max-w-4xl mx-auto reveal-element">
+                <h2 class="text-4xl md:text-6xl font-bold text-white mb-8">
+                    ¿Listo para <span class="text-curahi-dark">Crear</span> algo Increíble?
+                </h2>
+                <p class="text-2xl text-white/90 mb-12 leading-relaxed">
+                    Únete al MakerSpace y convierte tus ideas en prototipos reales. 
+                    Acceso completo por solo <span class="font-bold text-curahi-dark">$50/mes</span>.
+                </p>
+                
+                <div class="bg-white/10 backdrop-blur-sm rounded-3xl p-8 mb-12">
+                    <h3 class="text-2xl font-bold text-white mb-6">Membresía incluye:</h3>
+                    <div class="grid md:grid-cols-2 gap-6 text-left">
+                        <ul class="space-y-3 text-white/90">
+                            <li class="flex items-center space-x-3">
+                                <div class="w-6 h-6 bg-curahi-dark rounded-full flex items-center justify-center">
+                                    <svg class="w-4 h-4 text-curahi-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </div>
+                                <span>Acceso 24/7 al laboratorio</span>
+                            </li>
+                            <li class="flex items-center space-x-3">
+                                <div class="w-6 h-6 bg-curahi-dark rounded-full flex items-center justify-center">
+                                    <svg class="w-4 h-4 text-curahi-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </div>
+                                <span>Uso libre de impresoras 3D</span>
+                            </li>
+                            <li class="flex items-center space-x-3">
+                                <div class="w-6 h-6 bg-curahi-dark rounded-full flex items-center justify-center">
+                                    <svg class="w-4 h-4 text-curahi-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </div>
+                                <span>Talleres y capacitaciones gratuitas</span>
+                            </li>
+                        </ul>
+                        <ul class="space-y-3 text-white/90">
+                            <li class="flex items-center space-x-3">
+                                <div class="w-6 h-6 bg-curahi-dark rounded-full flex items-center justify-center">
+                                    <svg class="w-4 h-4 text-curahi-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </div>
+                                <span>Herramientas profesionales</span>
+                            </li>
+                            <li class="flex items-center space-x-3">
+                                <div class="w-6 h-6 bg-curahi-dark rounded-full flex items-center justify-center">
+                                    <svg class="w-4 h-4 text-curahi-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </div>
+                                <span>Almacenamiento de proyectos</span>
+                            </li>
+                            <li class="flex items-center space-x-3">
+                                <div class="w-6 h-6 bg-curahi-dark rounded-full flex items-center justify-center">
+                                    <svg class="w-4 h-4 text-curahi-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </div>
+                                <span>Comunidad de makers</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                    <a href="/registro/makerspace" class="px-12 py-4 bg-curahi-dark text-curahi-yellow font-bold text-xl rounded-2xl hover:scale-105 transition-all duration-300 shadow-2xl">
+                        Registrarse al MakerSpace
+                    </a>
+                    <a href="/tour-virtual" class="px-12 py-4 border-2 border-curahi-dark text-curahi-dark font-semibold text-xl rounded-2xl hover:bg-curahi-dark hover:text-white transition-all duration-300">
+                        Tour Virtual
+                    </a>
+                </div>
+
+                <p class="mt-8 text-white/70">
+                    ¿Tienes preguntas? <a href="#contacto" class="text-curahi-dark font-semibold hover:underline">Contáctanos</a> 
+                    o ven a conocer nuestras instalaciones.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <Footer />
+</Layout>
+
+<style>
+    /* Estilos específicos para MakerSpace */
+    .makerspace-gradient {
+        background: linear-gradient(135deg, var(--curahi-yellow) 0%, var(--curahi-orange) 100%);
+    }
+    
+    .makerspace-glow {
+        box-shadow: 0 0 30px rgba(255, 184, 0, 0.3);
+    }
+    
+    .makerspace-glow:hover {
+        box-shadow: 0 0 50px rgba(255, 184, 0, 0.5);
+    }
+</style>
+
+<script>
+    // Scripts específicos para la página del MakerSpace
+    document.addEventListener('DOMContentLoaded', function() {
+        // Animación especial para las cards de equipamiento
+        const equipmentCards = document.querySelectorAll('.reveal-element');
+        
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('revealed');
+                    }, index * 100); // Animación en cascada
+                }
+            });
+        }, observerOptions);
+
+        equipmentCards.forEach(card => {
+            card.classList.add('reveal-element');
+            observer.observe(card);
+        });
+
+        window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const decorativeElements = document.querySelectorAll<HTMLElement>('.hero-section .animate-float');
+      decorativeElements.forEach((element, index) => {
+        const speed = 0.5 + index * 0.1;
+        element.style.transform = `translateY(${scrolled * speed}px)`;
+      });
+    });
+
+         // Smooth scroll enlaces internos
+        document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', event => {
+        event.preventDefault();
+        const href = anchor.getAttribute('href');
+        if (!href) return;
+        const target = document.querySelector<HTMLElement>(href);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        });
+        });
+    });
+</script>

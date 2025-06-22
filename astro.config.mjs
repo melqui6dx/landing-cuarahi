@@ -5,10 +5,27 @@ import vercel from '@astrojs/vercel';
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [tailwind()],
+  integrations: [
+    tailwind({
+      // Aplicar base styles de Tailwind
+      applyBaseStyles: false, // Lo manejamos manualmente en global.css
+      // Configuración específica para producción
+      configFile: './tailwind.config.js'
+    })
+  ],
   output: 'static',
   adapter: vercel({
     webAnalytics: { enabled: true },
     imageService: true
   }),
+  // Configuración para asegurar que CSS se procese correctamente
+  vite: {
+    css: {
+      preprocessorOptions: {
+        css: {
+          charset: false
+        }
+      }
+    }
+  }
 });

@@ -21,4 +21,9 @@ module.exports = {
     }
   },
   plugins: [],
+  // Configuración específica para Vercel
+  important: false,
+  corePlugins: {
+    preflight: true
+  }
 }

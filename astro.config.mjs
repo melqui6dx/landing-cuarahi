@@ -8,7 +8,7 @@ export default defineConfig({
   integrations: [
     tailwind({
       // Aplicar base styles de Tailwind
-      applyBaseStyles: false, // Lo manejamos manualmente en global.css
+      applyBaseStyles: true, // Permitir que Tailwind aplique sus estilos base
       // Configuración específica para producción
       configFile: './tailwind.config.js'
     })

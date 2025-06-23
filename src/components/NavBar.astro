@@ -7,14 +7,14 @@ const isHomePage = currentPath === '/' || currentPath === '';
 ---
 
 <!-- Banner superior estilo eco.com -->
-<div class="top-banner bg-curahi-dark border-b border-white/10">
+<div class="top-banner">
     <div class="max-w-7xl mx-auto px-6 py-3">
         <div class="flex items-center justify-between">
             <div class="flex items-center space-x-4 text-sm text-white/80">
-                <span>Cuarahí Portal: Accede a más de 3 espacios de innovación con tarifas preferenciales.</span>
-                <a href="#espacios" class="underline hover:text-curahi-yellow transition-colors">Explorar Ahora</a>
+                <span>🚀 Cuarahí Portal: Accede a más de 3 espacios de innovación con tarifas preferenciales.</span>
+                <a href="#espacios" class="banner-link">Explorar Ahora</a>
             </div>
-            <button class="text-white/60 hover:text-white transition-colors">
+            <button class="banner-close-btn" aria-label="Cerrar banner">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
@@ -23,137 +23,455 @@ const isHomePage = currentPath === '/' || currentPath === '';
     </div>
 </div>
 
-<nav class="navbar-eco-clean">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-        <div class="flex justify-center items-center h-20">
-            <!-- Contenedor centrado estilo eco.com -->
-            <div class="flex items-center space-x-8 bg-white/10 backdrop-blur-lg rounded-full px-8 py-3 border border-white/15">
-                <!-- Logo -->
-                <a href="/" class="flex items-center space-x-2 group">
-                    <div class="w-8 h-8 rounded-lg flex items-center justify-center bg-gradient-to-br from-curahi-yellow/20 to-curahi-orange/20 group-hover:scale-110 transition-transform duration-300">
-                        <div class="w-3 h-3 bg-gradient-to-br from-curahi-yellow to-curahi-orange rounded-full"></div>
-                    </div>
-                    <span class="text-lg font-bold text-white">cuarahí</span>
-                </a>
-                
-                <!-- Desktop Navigation estilo eco.com -->
-                <div class="hidden md:flex items-center space-x-6">
-                    <a href="/espacios" class="nav-link-clean">Espacios</a>
-                    <a href="/blog" class="nav-link-clean">Blog</a>
-                    <a href="/soporte" class="nav-link-clean">Soporte</a>
-                    <a href="/contacto" class="nav-link-clean">Contacto</a>
-                    <a href="/acceso-temprano" class="nav-link-clean">Acceso Temprano</a>
-                </div>
-            </div>
-            
-            <!-- Enlaces externos derecha -->
-            <div class="hidden lg:flex items-center space-x-4 ml-8">
-                <a href="/trabajos" class="external-link">
-                    <span>TRABAJOS</span>
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                    </svg>
-                </a>
-                <a href="/discord" class="external-link">
-                    <span>DISCORD</span>
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                    </svg>
-                </a>
-                <a href="/twitter" class="external-link">
-                    <span>X</span>
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                    </svg>
-                </a>
-            </div>
-
-            <!-- Mobile Menu Button -->
-            <button id="mobile-menu-button" class="md:hidden ml-4 p-2 rounded-lg hover:bg-white/10 transition-colors duration-300" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menú móvil">
-                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+<nav class="navbar-eco">
+    <div class="navbar-container">
+        <!-- Enlaces externos izquierda (ocultos en móvil) -->
+        <div class="external-links-left">
+            <a href="/trabajos" class="external-link">
+                <span>TRABAJOS</span>
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
                 </svg>
-            </button>
+            </a>
         </div>
+
+        <!-- Navbar central con glassmorphism -->
+        <div class="navbar-center">
+            <!-- Logo -->
+            <a href="/" class="logo-container">
+                <div class="logo-glass-nav">
+                    <!-- Logo SVG simplificado -->
+                    <svg class="logo-svg-nav" viewBox="0 0 489.45 519.08" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="#fe3a14" d="M489.45.04c-.32,60.53-27.96,121.12-85.65,145.86-50.96,21.86-119.15,6.28-173.84,11.16-14.88,1.33-35.42,12.75-46.04,22.96-57.5,55.27-30.3,179.47,54.99,185.06,40.32,2.64,83.53-2.21,124.08-.08,7.97.42,17.55,2.38,24.71,4.29,67.61,18.05,101.87,82.81,101.75,149.75l-275.55.04c-282.46-20.93-287.94-500.6,0-519.08l275.55.04Z"/>
+                        <path fill="#f7931e" d="M271.35,249.7c.85-3.54,1.51-7.15,2.16-10.63,2.1-11.34,4.27-23.08,12.86-36.3,7.38-11.36,17.69-20.96,30.75-28.7-8.18-2.49-16.85-3.84-25.84-3.84-5.1,0-10.01.44-14.7,1.28-5.73,4.86-10.56,10.26-14.42,16.21-7.4,11.39-9.29,21.57-11.28,32.34-.67,3.62-1.36,7.36-2.27,11.18-5.42,22.66-17.9,44.39-37.19,64.86,4.07,8.04,9.53,15.8,16.14,22.74,23.29-21.74,38.01-44.96,43.79-69.12Z"/>
+                    </svg>
+                </div>
+                <span class="brand-text-nav">cuarahí</span>
+            </a>
+            
+            <!-- Separador visual -->
+            <div class="nav-separator"></div>
+            
+            <!-- Navegación principal -->
+            <div class="nav-links-desktop">
+                <a href="/espacios" class="nav-link">Espacios</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/soporte" class="nav-link">Soporte</a>
+                <a href="/contacto" class="nav-link">Contacto</a>
+                <a href="/acceso-temprano" class="nav-link nav-link--cta">Acceso Temprano</a>
+            </div>
+        </div>
+
+        <!-- Enlaces externos derecha -->
+        <div class="external-links-right">
+            <a href="/discord" class="external-link">
+                <span>DISCORD</span>
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                </svg>
+            </a>
+            <a href="/twitter" class="external-link">
+                <span>X</span>
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                </svg>
+            </a>
+        </div>
+
+        <!-- Botón menú móvil -->
+        <button id="mobile-menu-button" class="mobile-menu-btn">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
     </div>
 
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="md:hidden hidden">
-        <div class="px-6 pt-4 pb-6 space-y-4 bg-curahi-dark/95 backdrop-blur-lg border-t border-white/10">
-            <a href="/espacios" class="block nav-link-clean text-lg py-2">Espacios</a>
-            <a href="/blog" class="block nav-link-clean text-lg py-2">Blog</a>
-            <a href="/soporte" class="block nav-link-clean text-lg py-2">Soporte</a>
-            <a href="/contacto" class="block nav-link-clean text-lg py-2">Contacto</a>
-            <a href="/acceso-temprano" class="block nav-link-clean text-lg py-2">Acceso Temprano</a>
+    <!-- Menú móvil -->
+    <div id="mobile-menu" class="mobile-menu">
+        <div class="mobile-menu-content">
+            <div class="mobile-nav-links">
+                <a href="/espacios" class="mobile-nav-link">Espacios</a>
+                <a href="/blog" class="mobile-nav-link">Blog</a>
+                <a href="/soporte" class="mobile-nav-link">Soporte</a>
+                <a href="/contacto" class="mobile-nav-link">Contacto</a>
+                <a href="/acceso-temprano" class="mobile-nav-link mobile-nav-link--cta">Acceso Temprano</a>
+            </div>
             
-            <div class="border-t border-white/10 pt-4 space-y-2">
-                <a href="/trabajos" class="block external-link text-sm">TRABAJOS ↗</a>
-                <a href="/discord" class="block external-link text-sm">DISCORD ↗</a>
-                <a href="/twitter" class="block external-link text-sm">X ↗</a>
+            <div class="mobile-external-links">
+                <a href="/trabajos" class="mobile-external-link">TRABAJOS ↗</a>
+                <a href="/discord" class="mobile-external-link">DISCORD ↗</a>
+                <a href="/twitter" class="mobile-external-link">X ↗</a>
             </div>
         </div>
     </div>
 </nav>
 
 <style>
-/* Banner superior */
+/* ===== VARIABLES ESTILO ECO ===== */
+:root {
+    --navbar-height: 64px;
+    --banner-height: 44px;
+    --eco-glass: rgba(255, 255, 255, 0.08);
+    --eco-glass-border: rgba(255, 255, 255, 0.12);
+    --eco-glass-hover: rgba(255, 255, 255, 0.12);
+    --eco-blue: #3b82f6;
+    --eco-orange: #fe3a14;
+    --eco-yellow: #f7931e;
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.8);
+    --text-tertiary: rgba(255, 255, 255, 0.6);
+}
+
+/* ===== BANNER SUPERIOR ===== */
 .top-banner {
-    background: #0F172A;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 1001;
+    background: linear-gradient(135deg, #0f1419 0%, #1a2332 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
 }
 
-/* Navbar estilo eco.com limpio */
-.navbar-eco-clean {
+.banner-link {
+    color: var(--eco-yellow);
+    text-decoration: underline;
+    transition: all 0.2s ease;
+}
+
+.banner-link:hover {
+    color: #fcd34d;
+    text-decoration: none;
+}
+
+.banner-close-btn {
+    color: rgba(255, 255, 255, 0.6);
+    transition: all 0.2s ease;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.banner-close-btn:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* ===== NAVBAR PRINCIPAL ===== */
+.navbar-eco {
     position: fixed;
-    top: 52px; /* Altura del banner */
+    top: calc(var(--banner-height) + 12px); /* Agrega 12px de separación */
     left: 0;
     right: 0;
     z-index: 1000;
     background: transparent;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    height: var(--navbar-height);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Links de navegación limpios */
-.nav-link-clean {
-    @apply font-medium text-sm transition-all duration-300;
-    color: rgba(255, 255, 255, 0.8);
+.navbar-container {
+    max-width: 1400px;
+    width: 100%;
+    height: 100%; /* Cambiado a 100% para ocupar todo el alto de la navbar */
+    margin: 0 auto;
+    padding: 0 4rem; /* Solo padding horizontal */
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 1rem;
 }
 
-.nav-link-clean:hover {
-    color: white;
+.navbar-center {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--eco-glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--eco-glass-border);
+    border-radius: 50px;
+    padding: 0.5rem 1.5rem; /* Reduce el padding vertical */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    justify-self: center;
+    height: 52px; /* Opcional: fuerza un alto máximo para evitar desbordes */
+    box-sizing: border-box;
 }
 
-/* Enlaces externos */
+/* ===== ENLACES EXTERNOS ===== */
+.external-links-left,
+.external-links-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.external-links-left {
+    justify-content: flex-start;
+}
+
+.external-links-right {
+    justify-content: flex-end;
+}
+
 .external-link {
-    @apply flex items-center space-x-1 font-medium text-xs transition-all duration-300;
-    color: rgba(255, 255, 255, 0.6);
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.75rem;
+    font-weight: 600;
     letter-spacing: 0.1em;
+    color: var(--text-tertiary);
+    transition: all 0.2s ease;
+    text-decoration: none;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
 }
 
 .external-link:hover {
-    color: var(--curahi-yellow);
+    color: var(--eco-yellow);
+    background: rgba(255, 255, 255, 0.05);
 }
 
-/* Estados de scroll */
-.navbar-scrolled {
-    background: rgba(15, 23, 42, 0.8);
+/* ===== NAVBAR CENTRAL ===== */
+.navbar-center {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--eco-glass);
     backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--eco-glass-border);
+    border-radius: 50px;
+    padding: 0.75rem 1.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    justify-self: center;
 }
 
-.navbar-scrolled .bg-white\/10 {
-    background: rgba(255, 255, 255, 0.15);
+.navbar-center:hover {
+    background: var(--eco-glass-hover);
     border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
 }
 
-/* Mobile menu animations */
-.animate-slide-down {
-    animation: slideDown 0.3s ease-out;
+/* ===== LOGO NAVBAR ===== */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
 }
 
+.logo-container:hover {
+    transform: scale(1.02);
+}
+
+.logo-glass-nav {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, rgba(254, 58, 20, 0.2), rgba(247, 147, 30, 0.2));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.logo-svg-nav {
+    width: 18px;
+    height: 18px;
+}
+
+.brand-text-nav {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.025em;
+}
+
+/* ===== SEPARADOR ===== */
+.nav-separator {
+    width: 1px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 0 0.5rem;
+}
+
+/* ===== NAVEGACIÓN PRINCIPAL ===== */
+.nav-links-desktop {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.nav-link {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    position: relative;
+}
+
+.nav-link:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-link--cta {
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--text-primary);
+    font-weight: 600;
+    padding: 0.45rem 0.9rem; /* Más pequeño que antes */
+    border-radius: 20px;      /* Más pequeño que antes */
+    font-size: 0.95rem;       /* Ligeramente más pequeño */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-link--cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, 
+        rgba(59, 130, 246, 0.1) 0%, 
+        rgba(249, 115, 22, 0.1) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 25px;
+}
+
+.nav-link--cta:hover {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
+    box-shadow: 
+        0 6px 25px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(59, 130, 246, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.nav-link--cta:hover::before {
+    opacity: 1;
+}
+
+
+/* ===== MENÚ MÓVIL ===== */
+.mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px;
+    border: none;
+    background: var(--eco-glass);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.hamburger-line {
+    width: 20px;
+    height: 2px;
+    background: white;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.mobile-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(15, 20, 25, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-menu-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.mobile-nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.mobile-nav-link {
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 1rem;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+}
+
+.mobile-nav-link:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.mobile-nav-link--cta {
+    background: linear-gradient(135deg, var(--eco-blue), var(--eco-orange));
+    color: white;
+    font-weight: 600;
+    text-align: center;
+}
+
+.mobile-external-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-external-link {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    text-decoration: none;
+    padding: 0.75rem;
+    transition: all 0.2s ease;
+}
+
+.mobile-external-link:hover {
+    color: var(--eco-yellow);
+}
+
+/* ===== ESTADOS DE SCROLL ===== */
+.navbar-scrolled {
+    background: rgba(15, 20, 25, 0.9);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.navbar-scrolled .navbar-center {
+    background: var(--eco-glass-hover);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* ===== ANIMACIONES ===== */
 @keyframes slideDown {
     0% {
         opacity: 0;
@@ -165,122 +483,210 @@ const isHomePage = currentPath === '/' || currentPath === '';
     }
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .top-banner {
-        display: none; /* Ocultar banner en móvil */
+.animate-slide-down {
+    animation: slideDown 0.3s ease-out;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 1024px) {
+    .external-links-left {
+        display: none;
     }
     
-    .navbar-eco-clean {
+    .navbar-container {
+        grid-template-columns: auto 1fr;
+        gap: 1rem;
+    }
+    
+    .external-links-right {
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .top-banner {
+        display: none;
+    }
+    
+    .navbar-eco {
         top: 0;
     }
     
-    .navbar-eco-clean .bg-white\/10 {
-        @apply px-4 py-2;
+    .navbar-container {
+        grid-template-columns: 1fr auto;
+        padding: 0 1rem;
+    }
+    
+    .external-links-right,
+    .nav-links-desktop {
+        display: none;
+    }
+    
+    .mobile-menu-btn {
+        display: flex;
+    }
+    
+    .navbar-center {
+        padding: 0.5rem 1rem;
+        gap: 0.75rem;
+    }
+    
+    .nav-separator {
+        display: none;
+    }
+    
+    .mobile-menu.show {
+        display: block;
     }
 }
 
 @media (max-width: 640px) {
-    .navbar-eco-clean .max-w-7xl {
-        @apply px-4;
+    .navbar-container {
+        padding: 0 1rem;
     }
+    
+    .mobile-menu-content {
+        padding: 1.5rem 1rem;
+    }
+    
+    .brand-text-nav {
+        font-size: 1rem;
+    }
+    
+    .logo-glass-nav {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .logo-svg-nav {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+/* ===== ACCESIBILIDAD ===== */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ===== FOCUS STATES ===== */
+.nav-link:focus,
+.external-link:focus,
+.mobile-nav-link:focus {
+    outline: 2px solid var(--eco-blue);
+    outline-offset: 2px;
 }
 </style>
 
 <script>
-    // Funcionalidad del menú móvil y efectos de scroll
-    document.addEventListener('DOMContentLoaded', function() {
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        // Aseguramos el tipo HTMLElement para acceder a 'style'
-        const navbar = document.querySelector('.navbar-eco-clean') as HTMLElement | null;
-        let isOpen = false;
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navbar = document.querySelector('.navbar-eco') as HTMLElement | null;
+    const hamburgerLines = document.querySelectorAll('.hamburger-line');
+    let isOpen = false;
 
-        // Mobile menu toggle
-        if (mobileMenuButton && mobileMenu) {
-            mobileMenuButton.addEventListener('click', function() {
-                isOpen = !isOpen;
-                mobileMenuButton.setAttribute('aria-expanded', String(isOpen));
+    // Mobile menu toggle
+    if (mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener('click', function() {
+            isOpen = !isOpen;
+            mobileMenuButton.setAttribute('aria-expanded', String(isOpen));
 
-                if (isOpen) {
-                    mobileMenu.classList.remove('hidden');
-                    mobileMenu.classList.add('animate-slide-down');
-                } else {
-                    mobileMenu.classList.add('hidden');
-                    mobileMenu.classList.remove('animate-slide-down');
-                }
+            if (isOpen) {
+                mobileMenu.classList.add('show', 'animate-slide-down');
+                // Animar hamburguesa a X
+                hamburgerLines[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
+                hamburgerLines[1].style.opacity = '0';
+                hamburgerLines[2].style.transform = 'rotate(-45deg) translate(6px, -6px)';
+            } else {
+                mobileMenu.classList.remove('show', 'animate-slide-down');
+                // Restaurar hamburguesa
+                hamburgerLines.forEach(line => {
+                    (line as HTMLElement).style.transform = '';
+                    (line as HTMLElement).style.opacity = '';
+                });
+            }
+        });
+
+        // Cerrar menú móvil al hacer clic en enlaces
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                isOpen = false;
+                mobileMenuButton.setAttribute('aria-expanded', 'false');
+                mobileMenu.classList.remove('show', 'animate-slide-down');
+                hamburgerLines.forEach(line => {
+                    (line as HTMLElement).style.transform = '';
+                    (line as HTMLElement).style.opacity = '';
+                });
             });
+        });
 
-            // Cerrar menú móvil al hacer clic en enlaces
-            const mobileLinks = mobileMenu.querySelectorAll('a');
-            mobileLinks.forEach(link => {
-                link.addEventListener('click', function() {
+        // Cerrar menú móvil al hacer clic fuera
+        document.addEventListener('click', (e) => {
+            const target = e.target as Node;
+            if (!mobileMenuButton.contains(target) && !mobileMenu.contains(target)) {
+                if (isOpen) {
                     isOpen = false;
                     mobileMenuButton.setAttribute('aria-expanded', 'false');
-                    mobileMenu.classList.add('hidden');
-                    mobileMenu.classList.remove('animate-slide-down');
-                });
-            });
-
-            // Cerrar menú móvil al hacer clic fuera
-            document.addEventListener('click', (e) => {
-                const target = e.target as Node;
-                if (!mobileMenuButton.contains(target) && !mobileMenu.contains(target)) {
-                    if (isOpen) {
-                        isOpen = false;
-                        mobileMenuButton.setAttribute('aria-expanded', 'false');
-                        mobileMenu.classList.add('hidden');
-                        mobileMenu.classList.remove('animate-slide-down');
-                    }
+                    mobileMenu.classList.remove('show', 'animate-slide-down');
+                    hamburgerLines.forEach(line => {
+                        (line as HTMLElement).style.transform = '';
+                        (line as HTMLElement).style.opacity = '';
+                    });
                 }
-            });
-        }
+            }
+        });
+    }
 
-        // Navbar scroll effect
-        let scrolled = false;
+    // Navbar scroll effect
+    let scrolled = false;
+    
+    function updateNavbar() {
+        const shouldBeScrolled = window.scrollY > 100;
         
-        function updateNavbar() {
-            const shouldBeScrolled = window.scrollY > 100;
+        if (shouldBeScrolled !== scrolled) {
+            scrolled = shouldBeScrolled;
             
-            if (shouldBeScrolled !== scrolled) {
-                scrolled = shouldBeScrolled;
-                
-                if (scrolled) {
-                    navbar?.classList.add('navbar-scrolled');
-                } else {
-                    navbar?.classList.remove('navbar-scrolled');
-                }
+            if (scrolled) {
+                navbar?.classList.add('navbar-scrolled');
+            } else {
+                navbar?.classList.remove('navbar-scrolled');
             }
         }
+    }
 
-        // Throttled scroll listener
-        let ticking = false;
-        
-        function onScroll() {
-            if (!ticking) {
-                requestAnimationFrame(() => {
-                    updateNavbar();
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        }
-        
-        window.addEventListener('scroll', onScroll, { passive: true });
-        
-        // Inicializar estado
-        updateNavbar();
-
-        // Banner close functionality
-        const bannerCloseBtn = document.querySelector('.top-banner button');
-        // Aseguramos el tipo HTMLElement para acceder a 'style'
-        const banner = document.querySelector('.top-banner') as HTMLElement | null;
-        
-        if (bannerCloseBtn && banner && navbar) {
-            bannerCloseBtn.addEventListener('click', function() {
-                banner.style.display = 'none';
-                navbar.style.top = '0';
+    // Throttled scroll listener
+    let ticking = false;
+    
+    function onScroll() {
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                updateNavbar();
+                ticking = false;
             });
+            ticking = true;
         }
-    });
+    }
+    
+    window.addEventListener('scroll', onScroll, { passive: true });
+    
+    // Inicializar estado
+    updateNavbar();
+
+    // Banner close functionality
+    const bannerCloseBtn = document.querySelector('.banner-close-btn');
+    const banner = document.querySelector('.top-banner') as HTMLElement | null;
+    
+    if (bannerCloseBtn && banner && navbar) {
+        bannerCloseBtn.addEventListener('click', function() {
+            banner.style.display = 'none';
+            navbar.style.top = '0';
+        });
+    }
+});
 </script>

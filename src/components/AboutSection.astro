@@ -30,46 +30,592 @@ const stats = [
 ];
 ---
 
-<section id="sobre-nosotros" class="py-24 bg-curahi-dark">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section id="sobre-nosotros" class="about-section relative py-32 overflow-hidden">
+    <!-- Fondo dinámico con efecto paralaje -->
+    <div class="absolute inset-0 bg-[#0f1419]"></div>
+    <div class="absolute inset-0 noise-texture opacity-[0.02]"></div>
+    
+    <!-- Malla de puntos animada -->
+    <div class="dot-grid"></div>
+    
+    <!-- Elementos 3D flotantes -->
+    <div class="floating-elements">
+        <div class="floating-cube cube-1" data-depth="1.5"></div>
+        <div class="floating-cube cube-2" data-depth="2.2"></div>
+        <div class="floating-sphere sphere-1" data-depth="1.2"></div>
+        <div class="floating-sphere sphere-2" data-depth="1.8"></div>
+    </div>
+    
+    <!-- Líneas de conexión -->
+    <div class="connection-lines">
+        <svg class="lines-svg" viewBox="0 0 1000 600" preserveAspectRatio="none">
+            <path class="line-path line-1" d="M0,100 Q500,300 1000,100" />
+            <path class="line-path line-2" d="M0,300 Q500,100 1000,300" />
+            <path class="line-path line-3" d="M0,500 Q500,400 1000,500" />
+        </svg>
+    </div>
+    
+    <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         <div class="grid lg:grid-cols-2 gap-16 items-center">
-            <div class="reveal-element">
-                <h2 class="heading-xl text-white mb-8">
-                    Impulsando la <span class="gradient-text">Innovación</span> en Bolivia
+            <!-- Columna de texto con elementos de énfasis -->
+            <div class="fade-up opacity-0" id="about-text">
+                <!-- Decoración superior -->
+                <div class="title-decoration">
+                    <div class="title-line"></div>
+                    <div class="title-dot"></div>
+                    <div class="title-line"></div>
+                </div>
+                
+                <h2 class="text-5xl font-bold text-white mb-8 tracking-tight">
+                    Impulsando la <span class="text-gradient animated-gradient">Innovación</span> en <br>Bolivia
                 </h2>
-                <p class="text-xl text-white/80 leading-relaxed mb-8">
+                
+                <p class="text-xl text-white/80 leading-relaxed mb-12 enhanced-text">
                     Cuarahí nace de la visión de crear un ecosistema donde jóvenes talentosos puedan materializar 
                     sus ideas más audaces. Somos más que un espacio de trabajo: somos una comunidad que 
-                    transforma el futuro.
+                    transforma el futuro digital de Bolivia.
                 </p>
+                
+                <!-- Estadísticas con efectos visuales -->
                 <div class="grid grid-cols-2 gap-8">
-                    {stats.map((stat) => (
-                        <div class="text-center">
-                            <div class="text-4xl font-bold gradient-text mb-2">{stat.number}</div>
-                            <div class="text-white/70">{stat.label}</div>
+                    {stats.map((stat, index) => (
+                        <div class="stat-card" style={`animation-delay: ${index * 200}ms`}>
+                            <div class="stat-backdrop"></div>
+                            <div class="stat-content">
+                                <div class="stat-number">{stat.number}</div>
+                                <div class="stat-label">{stat.label}</div>
+                            </div>
+                            <div class="stat-highlight"></div>
                         </div>
                     ))}
                 </div>
             </div>
             
-            <div class="relative reveal-element">
-                <div class="absolute inset-0 gradient-bg rounded-3xl blur-2xl opacity-20 animate-pulse-glow"></div>
-                <div class="relative bg-curahi-navy/50 p-12 rounded-3xl glass-effect">
-                    <div class="grid grid-cols-2 gap-8">
-                        {features.map((feature) => (
-                            <div class="text-center group">
-                                <div class="w-16 h-16 gradient-bg rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={feature.icon}></path>
-                                    </svg>
+            <!-- Columna de características con efectos 3D y hover -->
+            <div class="features-container fade-up opacity-0" id="about-features" style="transition-delay: 150ms;">                
+                <!-- Contenedor principal con efecto de profundidad -->
+                <div class="features-card">
+                    <div class="features-card-glow"></div>
+                    <div class="features-card-content">
+                        <div class="grid grid-cols-2 gap-6">
+                            {features.map((feature, index) => (
+                                <div class="feature-item" style={`animation-delay: ${index * 150}ms`}>
+                                    <div class="feature-icon-container">
+                                        <div class="feature-icon-backdrop"></div>
+                                        <svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={feature.icon}></path>
+                                        </svg>
+                                        <div class="feature-icon-glow"></div>
+                                    </div>
+                                    
+                                    <h4 class="feature-title">{feature.title}</h4>
+                                    <p class="feature-description">{feature.description}</p>
                                 </div>
-                                <h4 class="font-bold text-white mb-2">{feature.title}</h4>
-                                <p class="text-white/70 text-sm">{feature.description}</p>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
+    <!-- Script para animaciones de entrada -->
+    <script>
+        // Observador de intersección para animaciones al scroll
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, entry.target.id === 'about-text' ? 0 : 150);
+                    }
+                });
+            },
+            { threshold: 0.1 }
+        );
+
+        // Observar elementos
+        document.querySelectorAll('.fade-up').forEach((el) => {
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 1s cubic-bezier(0.4, 0, 0.2, 1)';
+            observer.observe(el);
+        });
+        
+        // Animación de elementos 3D en paralaje
+        document.addEventListener('mousemove', (e) => {
+            const { clientX, clientY } = e;
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            
+            // Calcular desplazamiento desde el centro
+            const moveX = (clientX - centerX) / 50;
+            const moveY = (clientY - centerY) / 50;
+            
+            // Aplicar efecto paralaje a los elementos 3D
+            document.querySelectorAll('.floating-cube, .floating-sphere').forEach(el => {
+                const depth = parseFloat(el.getAttribute('data-depth') || '1');
+                const x = moveX * depth;
+                const y = moveY * depth;
+                el.style.transform = `translate3d(${x}px, ${y}px, 0) rotate3d(${moveY/10}, ${-moveX/10}, 0, 12deg)`;
+            });
+            
+            // Efecto de paralaje en la tarjeta de características
+            const featuresCard = document.querySelector('.features-card');
+            if (featuresCard) {
+                featuresCard.style.transform = `translate3d(${moveX * 0.3}px, ${moveY * 0.3}px, 0) rotateX(${moveY * 0.05}deg) rotateY(${-moveX * 0.05}deg)`;
+            }
+        });
+    </script>
 </section>
+
+<style>
+/* Sección general */
+.about-section {
+    position: relative;
+    perspective: 1000px;
+}
+
+/* Malla de puntos animada */
+.dot-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 30px 30px;
+    opacity: 0.3;
+    z-index: 1;
+}
+
+/* Elementos 3D flotantes */
+.floating-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.floating-cube {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    transform-style: preserve-3d;
+    transform: rotate3d(1, 1, 1, 45deg);
+    animation: floatRotate 20s infinite linear;
+}
+
+.floating-cube::before, 
+.floating-cube::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 1px solid rgba(255, 82, 0, 0.2);
+    box-shadow: 0 0 20px rgba(255, 82, 0, 0.1);
+}
+
+.floating-cube::before {
+    transform: translateZ(-30px);
+}
+
+.floating-cube::after {
+    transform: translateZ(30px);
+}
+
+.cube-1 {
+    top: 20%;
+    left: 15%;
+    border: 1px solid rgba(255, 82, 0, 0.15);
+}
+
+.cube-2 {
+    bottom: 25%;
+    right: 10%;
+    width: 80px;
+    height: 80px;
+    border: 1px solid rgba(59, 130, 246, 0.15);
+}
+
+.floating-sphere {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1), transparent);
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: floatPulse 8s infinite ease-in-out;
+}
+
+.sphere-1 {
+    width: 100px;
+    height: 100px;
+    top: 60%;
+    left: 5%;
+}
+
+.sphere-2 {
+    width: 120px;
+    height: 120px;
+    top: 8%;
+    right: 10%;
+}
+
+@keyframes floatRotate {
+    0% {
+        transform: rotate3d(1, 1, 1, 0deg);
+    }
+    100% {
+        transform: rotate3d(1, 1, 1, 360deg);
+    }
+}
+
+@keyframes floatPulse {
+    0%, 100% {
+        transform: scale(0.95);
+        opacity: 0.6;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+}
+
+/* Líneas de conexión */
+.connection-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.lines-svg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.line-path {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.05);
+    stroke-width: 1;
+    stroke-dasharray: 5, 5;
+    animation: lineDash 30s infinite linear;
+}
+
+.line-1 {
+    animation-delay: -10s;
+}
+
+.line-2 {
+    animation-delay: -20s;
+}
+
+.line-3 {
+    animation-delay: -30s;
+}
+
+@keyframes lineDash {
+    to {
+        stroke-dashoffset: 1000;
+    }
+}
+
+/* Decoración del título */
+.title-decoration {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+}
+
+.title-line {
+    height: 1px;
+    width: 50px;
+    background: linear-gradient(90deg, rgba(255, 82, 0, 0.3), transparent);
+}
+
+.title-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ff5200;
+    animation: pulseDot 3s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+    0%, 100% {
+        transform: scale(0.8);
+        opacity: 0.7;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+}
+
+/* Texto con gradiente animado */
+.text-gradient {
+    background: linear-gradient(135deg, #ff5200, #ff7e3f);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+}
+
+.animated-gradient {
+    background-size: 200% 200%;
+    animation: gradientAnimation 8s ease infinite;
+}
+
+@keyframes gradientAnimation {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Texto mejorado con línea de subrayado */
+.enhanced-text {
+    position: relative;
+    padding-left: 20px;
+    border-left: 2px solid rgba(255, 82, 0, 0.3);
+}
+
+/* Tarjetas de estadísticas */
+.stat-card {
+    position: relative;
+    padding: 1.5rem;
+    border-radius: 16px;
+    overflow: hidden;
+    animation: fadeIn 0.5s forwards;
+    opacity: 0;
+    transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    z-index: -1;
+}
+
+.stat-content {
+    position: relative;
+    z-index: 1;
+}
+
+.stat-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #ff5200;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #ff5200, #ff7e3f);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+}
+
+.stat-label {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
+}
+
+.stat-highlight {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, rgba(255, 82, 0, 0.8), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.stat-card:hover .stat-highlight {
+    opacity: 1;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Contenedor de características */
+.features-container {
+    perspective: 1000px;
+}
+
+.features-card {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transform-style: preserve-3d;
+}
+
+.features-card-glow {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 82, 0, 0.05), rgba(59, 130, 246, 0.05));
+    border-radius: 24px;
+    opacity: 0.5;
+    z-index: -1;
+}
+
+.features-card-content {
+    background: rgba(15, 20, 25, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 2rem;
+}
+
+/* Items de características */
+.feature-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem 1rem;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    animation: fadeInUp 0.5s forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.feature-icon-container {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.feature-icon-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 82, 0, 0.1);
+    border-radius: 16px;
+    transform: rotate(-5deg);
+    transition: transform 0.3s ease;
+}
+
+.feature-item:hover .feature-icon-backdrop {
+    transform: rotate(5deg) scale(1.1);
+}
+
+.feature-icon {
+    width: 30px;
+    height: 30px;
+    color: #ff5200;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease;
+}
+
+.feature-item:hover .feature-icon {
+    transform: scale(1.1);
+}
+
+.feature-icon-glow {
+    position: absolute;
+    inset: -10px;
+    background: radial-gradient(circle, rgba(255, 82, 0, 0.2), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.feature-item:hover .feature-icon-glow {
+    opacity: 1;
+}
+
+.feature-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.feature-description {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .floating-cube,
+    .floating-sphere {
+        display: none;
+    }
+    
+    .stat-card {
+        padding: 1rem;
+    }
+    
+    .stat-number {
+        font-size: 2.5rem;
+    }
+    
+    .features-card-content {
+        padding: 1.5rem;
+    }
+    
+    .feature-item {
+        padding: 1rem 0.75rem;
+    }
+    
+    .feature-icon-container {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .feature-icon {
+        width: 24px;
+        height: 24px;
+    }
+}
+</style>

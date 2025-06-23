@@ -752,4 +752,13 @@ footer {
     animation: none !important;
     transition: none !important;
   }
+  
+  .gradient-text-eco {
+    background: linear-gradient(135deg, var(--eco-blue) 0%, var(--eco-orange) 50%, var(--eco-yellow) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 200%;
+    animation: gradient-shift 6s ease-in-out infinite;
+}
 }

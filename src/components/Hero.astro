@@ -83,6 +83,71 @@
         </div>
     </div>
 
+    <!-- Añade este script al final del componente Hero.astro, justo antes del cierre de la etiqueta </section> -->
+
+<script>
+    // Script para controlar la visibilidad del banner según la posición de scroll
+    document.addEventListener('DOMContentLoaded', function() {
+        const topBanner = document.querySelector('.top-banner');
+        const navbar = document.querySelector('.navbar-eco');
+        
+        if (!topBanner || !navbar) return;
+        
+        // Guardar la altura del banner para usar en cálculos
+        const bannerHeight = topBanner.offsetHeight;
+        
+        // Función para actualizar la visibilidad del banner
+        function updateBannerVisibility() {
+            const scrollY = window.scrollY;
+            // Usamos querySelector con operador opcional para mayor compatibilidad
+            const heroSection = document.querySelector('.hero-section');
+            const heroHeight = heroSection ? heroSection.offsetHeight : 0;
+            
+            // Si estamos al inicio de la página (en el hero), mostrar banner
+            if (scrollY < 50) {
+                topBanner.style.transform = 'translateY(0)';
+                topBanner.style.opacity = '1';
+                topBanner.style.visibility = 'visible';
+                navbar.style.top = bannerHeight + 12 + 'px'; // Mantén el espacio que tenías (12px)
+            } 
+            // Si hemos pasado el hero section, ocultar banner
+            else {
+                topBanner.style.transform = 'translateY(-100%)';
+                topBanner.style.opacity = '0';
+                // Después de la transición, ocultar completamente para evitar que ocupe espacio
+                setTimeout(function() {
+                    if (window.scrollY > 50) { // Verificar nuevamente por si el usuario volvió arriba rápidamente
+                        topBanner.style.visibility = 'hidden';
+                    }
+                }, 300); // Coincidir con la duración de la transición
+                navbar.style.top = '0';
+            }
+        }
+        
+        // Establecer propiedades iniciales de transición para el banner
+        topBanner.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+        
+        // Configurar listener para el scroll con throttling para mejor rendimiento
+        let ticking = false;
+        window.addEventListener('scroll', function() {
+            if (!ticking) {
+                window.requestAnimationFrame(function() {
+                    updateBannerVisibility();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true });
+        
+        // Ejecutar una vez al cargar para establecer el estado inicial correcto
+        updateBannerVisibility();
+        
+        // También actualizar cuando cambia el tamaño de la ventana
+        window.addEventListener('resize', updateBannerVisibility, { passive: true });
+    });
+</script>
+
+    
 </section>
 
 <style>

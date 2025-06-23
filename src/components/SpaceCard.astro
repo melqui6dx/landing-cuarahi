@@ -12,56 +12,87 @@ export interface Props {
 
 const { title, description, href, icon, tagline, color, delay = '0s' } = Astro.props;
 
-// Mapeo de colores a clases CSS
-const colorClasses = {
+// Mapeo de colores a variables CSS y clases
+const colorMap = {
   yellow: {
-    card: 'space-card-makerspace',
-    icon: 'icon-float-makerspace',
-    text: 'text-curahi-yellow',
-    iconColor: 'text-curahi-yellow',
-    hoverBg: 'group-hover:bg-curahi-yellow/40'
+    cardBg: 'linear-gradient(135deg, var(--eco-glass), rgba(251, 191, 36, 0.08))',
+    borderColor: 'rgba(251, 191, 36, 0.3)',
+    textColor: 'var(--eco-yellow)',
+    iconBg: 'rgba(251, 191, 36, 0.15)',
+    iconBorder: 'rgba(251, 191, 36, 0.3)',
+    iconShadow: 'rgba(251, 191, 36, 0.2)',
+    hoverShadow: 'rgba(251, 191, 36, 0.25)',
+    glowColor: 'var(--eco-yellow-light)'
   },
   orange: {
-    card: 'space-card-devspace', 
-    icon: 'icon-float-devspace',
-    text: 'text-curahi-orange',
-    iconColor: 'text-curahi-orange',
-    hoverBg: 'group-hover:bg-curahi-orange/40'
+    cardBg: 'linear-gradient(135deg, var(--eco-glass), rgba(249, 115, 22, 0.08))',
+    borderColor: 'rgba(249, 115, 22, 0.3)',
+    textColor: 'var(--eco-orange)',
+    iconBg: 'rgba(249, 115, 22, 0.15)',
+    iconBorder: 'rgba(249, 115, 22, 0.3)',
+    iconShadow: 'rgba(249, 115, 22, 0.2)',
+    hoverShadow: 'rgba(249, 115, 22, 0.25)',
+    glowColor: 'var(--eco-orange-light)'
   },
   red: {
-    card: 'space-card-eduspace',
-    icon: 'icon-float-eduspace', 
-    text: 'text-curahi-red',
-    iconColor: 'text-curahi-red',
-    hoverBg: 'group-hover:bg-curahi-red/40'
+    cardBg: 'linear-gradient(135deg, var(--eco-glass), rgba(239, 68, 68, 0.08))',
+    borderColor: 'rgba(239, 68, 68, 0.3)',
+    textColor: 'var(--eco-blue-light)',
+    iconBg: 'rgba(59, 130, 246, 0.15)',
+    iconBorder: 'rgba(59, 130, 246, 0.3)',
+    iconShadow: 'rgba(59, 130, 246, 0.2)',
+    hoverShadow: 'rgba(59, 130, 246, 0.25)',
+    glowColor: 'var(--eco-blue-light)'
   }
 };
 
-const classes = colorClasses[color];
+const styles = colorMap[color];
 ---
 
 <a href={href} class="group block">
-    <div class={`space-card relative p-10 rounded-3xl ${classes.card} hover-lift glass-effect`}>
-        <div class={`absolute top-8 right-8 icon-float ${classes.icon}`} style={`animation-delay: ${delay};`}>
-            <svg class={`w-10 h-10 ${classes.iconColor}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={icon}></path>
-            </svg>
+  <div class="relative overflow-hidden rounded-2xl transition-all duration-500 ease-out hover:-translate-y-2"
+    style={`background: ${styles.cardBg}; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid ${styles.borderColor}; box-shadow: var(--eco-shadow-glass); transition: var(--transition-smooth);`}>
+    
+    <!-- Efecto de borde superior animado -->
+    <div class="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-transparent via-current to-transparent opacity-0 transition-all duration-700 ease-out group-hover:opacity-100 group-hover:via-current"
+      style={`--tw-text-opacity: 1; color: ${styles.glowColor};`}></div>
+    
+    <!-- Contenido principal -->
+    <div class="relative z-10 p-8">
+      <!-- Icono flotante -->
+      <div class="absolute right-8 top-8" style={`animation: float-gentle 6s ease-in-out infinite; animation-delay: ${delay};`}>
+        <div class="flex h-16 w-16 items-center justify-center rounded-xl"
+          style={`background: linear-gradient(135deg, ${styles.iconBg}, rgba(255, 255, 255, 0.05)); border: 1px solid ${styles.iconBorder}; box-shadow: 0 8px 32px ${styles.iconShadow};`}>
+          <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+            style={`color: ${styles.textColor};`}>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={icon}></path>
+          </svg>
         </div>
-        
-        <div class="mb-8">
-            <h3 class={`text-4xl font-bold ${classes.text} mb-4`}>{title}</h3>
-            <p class="text-white/90 text-lg leading-relaxed">
-                {description}
-            </p>
+      </div>
+
+      <!-- Texto del card -->
+      <div class="mb-8 pt-4">
+        <h3 class="mb-3 text-3xl font-bold tracking-tight" style={`color: ${styles.textColor};`}>{title}</h3>
+        <p class="text-lg leading-relaxed text-white/90">
+          {description}
+        </p>
+      </div>
+      
+      <!-- Footer del card con tagline y flecha -->
+      <div class="flex items-center justify-between">
+        <span class="font-medium opacity-90" style={`color: ${styles.textColor};`}>{tagline}</span>
+        <div class="flex h-10 w-10 items-center justify-center rounded-full transition-all duration-300 ease-out group-hover:scale-110"
+          style={`background: ${styles.iconBg}; box-shadow: 0 4px 12px ${styles.iconShadow};`}>
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+            style={`color: ${styles.textColor}; transition: transform 0.3s ease-out;`}>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
         </div>
-        
-        <div class="flex items-center justify-between">
-            <span class={`${classes.text}/80 font-medium`}>{tagline}</span>
-            <div class={`w-8 h-8 bg-${color === 'yellow' ? 'curahi-yellow' : color === 'orange' ? 'curahi-orange' : 'curahi-red'}/20 rounded-full flex items-center justify-center ${classes.hoverBg} transition-colors`}>
-                <svg class={`w-4 h-4 ${classes.iconColor}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                </svg>
-            </div>
-        </div>
+      </div>
     </div>
+    
+    <!-- Overlay de brillo al hacer hover -->
+    <div class="absolute inset-0 bg-gradient-to-br opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-10"
+      style={`background: linear-gradient(135deg, transparent, ${styles.glowColor});`}></div>
+  </div>
 </a>

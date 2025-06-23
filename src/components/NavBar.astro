@@ -192,7 +192,8 @@ const isHomePage = currentPath === '/' || currentPath === '';
     document.addEventListener('DOMContentLoaded', function() {
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
-        const navbar = document.querySelector('.navbar-eco-clean');
+        // Aseguramos el tipo HTMLElement para acceder a 'style'
+        const navbar = document.querySelector('.navbar-eco-clean') as HTMLElement | null;
         let isOpen = false;
 
         // Mobile menu toggle
@@ -272,9 +273,10 @@ const isHomePage = currentPath === '/' || currentPath === '';
 
         // Banner close functionality
         const bannerCloseBtn = document.querySelector('.top-banner button');
-        const banner = document.querySelector('.top-banner');
+        // Aseguramos el tipo HTMLElement para acceder a 'style'
+        const banner = document.querySelector('.top-banner') as HTMLElement | null;
         
-        if (bannerCloseBtn && banner) {
+        if (bannerCloseBtn && banner && navbar) {
             bannerCloseBtn.addEventListener('click', function() {
                 banner.style.display = 'none';
                 navbar.style.top = '0';

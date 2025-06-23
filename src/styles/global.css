@@ -1,6 +1,9 @@
 /* STYLES.CSS - INTEGRACIÓN ESTILO ECO.COM */
 /* Adaptado para cohesión total con el Hero Component */
 
+/* ===== FUENTE LEXEND DECA ===== */
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 /* ===== VARIABLES GLOBALES ECO-STYLE ===== */
 :root {
   /* Colores principales - Eco.com inspired */
@@ -72,7 +75,7 @@ html {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Lexend Deca', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   background: var(--eco-primary-bg);
   background-attachment: fixed;
   color: var(--eco-text-primary);

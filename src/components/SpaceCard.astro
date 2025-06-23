@@ -12,56 +12,95 @@ export interface Props {
 
 const { title, description, href, icon, tagline, color, delay = '0s' } = Astro.props;
 
-// Mapeo de colores a clases CSS
-const colorClasses = {
+// Mapeo de colores a variables CSS y clases - ajustado según los logos de Cuarahi
+const colorMap = {
   yellow: {
-    card: 'space-card-makerspace',
-    icon: 'icon-float-makerspace',
-    text: 'text-curahi-yellow',
-    iconColor: 'text-curahi-yellow',
-    hoverBg: 'group-hover:bg-curahi-yellow/40'
+    // MakerSpace - Fondo amarillo con azul oscuro
+    cardBg: 'linear-gradient(135deg, rgba(255, 193, 7, 0.12), rgba(255, 193, 7, 0.05))',
+    borderColor: 'rgba(255, 193, 7, 0.3)',
+    textColor: '#ffbc0d', // Amarillo intenso
+    iconBg: 'rgba(255, 193, 7, 0.15)',
+    iconBorder: 'rgba(255, 193, 7, 0.3)',
+    iconShadow: 'rgba(255, 193, 7, 0.2)',
+    hoverShadow: 'rgba(255, 193, 7, 0.25)',
+    glowColor: '#ffbc0d'
   },
   orange: {
-    card: 'space-card-devspace', 
-    icon: 'icon-float-devspace',
-    text: 'text-curahi-orange',
-    iconColor: 'text-curahi-orange',
-    hoverBg: 'group-hover:bg-curahi-orange/40'
+    // DevSpace - Fondo azul oscuro con naranja
+    cardBg: 'linear-gradient(135deg, rgba(255, 82, 0, 0.12), rgba(255, 82, 0, 0.05))',
+    borderColor: 'rgba(255, 82, 0, 0.3)',
+    textColor: '#ff5200', // Naranja intenso
+    iconBg: 'rgba(255, 82, 0, 0.15)',
+    iconBorder: 'rgba(255, 82, 0, 0.3)',
+    iconShadow: 'rgba(255, 82, 0, 0.2)',
+    hoverShadow: 'rgba(255, 82, 0, 0.25)',
+    glowColor: '#ff7e3f'
   },
   red: {
-    card: 'space-card-eduspace',
-    icon: 'icon-float-eduspace', 
-    text: 'text-curahi-red',
-    iconColor: 'text-curahi-red',
-    hoverBg: 'group-hover:bg-curahi-red/40'
+    // EduSpace - Fondo celeste con azul oscuro
+    cardBg: 'linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(191, 219, 254, 0.12))',
+    borderColor: 'rgba(191, 219, 254, 0.5)',  // Borde celeste claro
+    textColor: '#3b82f6', // Azul vivo
+    iconBg: 'rgba(59, 130, 246, 0.15)',
+    iconBorder: 'rgba(191, 219, 254, 0.5)',  // Borde celeste claro para el icono también
+    iconShadow: 'rgba(59, 130, 246, 0.2)',
+    hoverShadow: 'rgba(59, 130, 246, 0.25)',
+    glowColor: '#60a5fa'
   }
 };
 
-const classes = colorClasses[color];
+const styles = colorMap[color];
 ---
 
 <a href={href} class="group block">
-    <div class={`space-card relative p-10 rounded-3xl ${classes.card} hover-lift glass-effect`}>
-        <div class={`absolute top-8 right-8 icon-float ${classes.icon}`} style={`animation-delay: ${delay};`}>
-            <svg class={`w-10 h-10 ${classes.iconColor}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={icon}></path>
-            </svg>
+  <div class="relative overflow-hidden rounded-2xl transition-all duration-500 ease-out hover:-translate-y-2 h-[300px]"
+    style={`background: ${styles.cardBg}; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid ${styles.borderColor}; box-shadow: var(--eco-shadow-glass); transition: var(--transition-smooth);`}>
+    
+    <!-- Efecto de borde superior animado -->
+    <div class="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-transparent via-current to-transparent opacity-0 transition-all duration-700 ease-out group-hover:opacity-100 group-hover:via-current"
+      style={`--tw-text-opacity: 1; color: ${styles.glowColor};`}></div>
+    
+    <!-- Contenido principal -->
+    <div class="relative z-10 p-8 flex flex-col h-full">
+      <!-- Icono flotante -->
+      <div class="absolute right-8 top-8" style={`animation: float-gentle 6s ease-in-out infinite; animation-delay: ${delay};`}>
+        <div class="flex h-14 w-14 items-center justify-center rounded-xl"
+          style={`background: linear-gradient(135deg, ${styles.iconBg}, rgba(255, 255, 255, 0.05)); border: 1px solid ${styles.iconBorder}; box-shadow: 0 8px 32px ${styles.iconShadow};`}>
+          <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+            style={`color: ${styles.textColor};`}>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={icon}></path>
+          </svg>
         </div>
-        
-        <div class="mb-8">
-            <h3 class={`text-4xl font-bold ${classes.text} mb-4`}>{title}</h3>
-            <p class="text-white/90 text-lg leading-relaxed">
-                {description}
-            </p>
+      </div>
+
+      <!-- Texto del card -->
+      <div class="mb-auto pt-4">
+        <h3 class="mb-3 text-2xl font-bold tracking-tight" style={`color: ${styles.textColor};`}>{title}</h3>
+        <p class="text-base leading-relaxed text-white/90 line-clamp-4">
+          {description}
+        </p>
+      </div>
+      
+      <!-- Footer del card con tagline y flecha -->
+      <div class="flex items-center justify-between mt-4">
+        <span class="font-medium opacity-90 text-sm" style={`color: ${styles.textColor};`}>{tagline}</span>
+        <div class="flex h-8 w-8 items-center justify-center rounded-full transition-all duration-300 ease-out group-hover:scale-110"
+          style={`background: ${styles.iconBg}; box-shadow: 0 4px 12px ${styles.iconShadow};`}>
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+            style={`color: ${styles.textColor}; transition: transform 0.3s ease-out;`}>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
         </div>
-        
-        <div class="flex items-center justify-between">
-            <span class={`${classes.text}/80 font-medium`}>{tagline}</span>
-            <div class={`w-8 h-8 bg-${color === 'yellow' ? 'curahi-yellow' : color === 'orange' ? 'curahi-orange' : 'curahi-red'}/20 rounded-full flex items-center justify-center ${classes.hoverBg} transition-colors`}>
-                <svg class={`w-4 h-4 ${classes.iconColor}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                </svg>
-            </div>
-        </div>
+      </div>
     </div>
+    
+    <!-- Overlay de brillo al hacer hover -->
+    <div class="absolute inset-0 bg-gradient-to-br opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-15"
+      style={`background: linear-gradient(135deg, transparent, ${styles.glowColor});`}></div>
+  </div>
+    
+    <!-- Overlay de brillo al hacer hover -->
+    <div class="absolute inset-0 bg-gradient-to-br opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-10"
+      style={`background: linear-gradient(135deg, transparent, ${styles.glowColor});`}></div>
+  </div>
 </a>

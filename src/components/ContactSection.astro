@@ -17,38 +17,272 @@ const contactInfo = [
 ];
 ---
 
-<section id="contacto" class="py-24 gradient-bg">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div class="max-w-4xl mx-auto reveal-element">
-            <h2 class="heading-xl text-white mb-8">
-                ¿Listo para <span class="text-curahi-dark">Transformar</span> tu Futuro?
+<section id="contacto" class="contact-section relative py-32 overflow-hidden">
+    <!-- Fondo sólido con gradiente -->
+    <div class="absolute inset-0 bg-[#ff5200]"></div>
+    <div class="absolute inset-0 noise-texture opacity-[0.05]"></div>
+    
+    <!-- Partículas sutiles -->
+    <div class="particles-container">
+        <div class="particle particle-1"></div>
+        <div class="particle particle-2"></div>
+        <div class="particle particle-3"></div>
+        <div class="particle particle-4"></div>
+        <div class="particle particle-5"></div>
+    </div>
+    
+    <!-- Elemento decorativo simple -->
+    <div class="absolute top-16 left-1/2 transform -translate-x-1/2">
+        <div class="w-12 h-1 bg-white/30 rounded-full"></div>
+    </div>
+    
+    <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
+        <div class="max-w-4xl mx-auto fade-up opacity-0" id="contact-content">
+            <h2 class="text-5xl font-bold text-white mb-8 tracking-tight">
+                ¿Listo para <span class="gradient-text-static">Transformar</span> tu Futuro?
             </h2>
-            <p class="text-2xl text-white/90 mb-12 leading-relaxed">
+            
+            <p class="text-xl text-white/90 mb-16 leading-relaxed">
                 Únete a nuestra comunidad y comienza tu aventura de innovación hoy mismo.
             </p>
             
-            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
-                <a href="#espacios" class="px-12 py-4 bg-curahi-dark text-white font-bold text-xl rounded-2xl hover:scale-105 transition-all duration-300 shadow-2xl hover-glow">
+            <!-- Botones alineados horizontalmente -->
+            <div class="flex justify-center gap-6 mb-20">
+                <a href="#espacios" class="cta-button primary-button">
                     Comenzar Mi Aventura
                 </a>
-                <a href="mailto:hola@curahi.bo" class="px-12 py-4 border-2 border-curahi-dark text-curahi-dark font-semibold text-xl rounded-2xl hover:bg-curahi-dark hover:text-white transition-all duration-300">
+                <a href="mailto:hola@curahi.bo" class="cta-button secondary-button">
                     Contactar
                 </a>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-8 text-curahi-dark">
+            <!-- Contenedor simplificado para los iconos de contacto -->
+            <div class="contact-info-container">
                 {contactInfo.map((info) => (
-                    <div class="flex items-center justify-center space-x-3 group">
-                        <svg class="w-6 h-6 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={info.icon}></path>
-                        </svg>
-                        <span class="font-semibold">{info.text}</span>
+                    <div class="contact-item">
+                        <div class="icon-wrapper">
+                            <svg class="contact-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={info.icon}></path>
+                            </svg>
+                        </div>
+                        <span class="info-text">{info.text}</span>
                     </div>
                 ))}
             </div>
-
-            <form action="mailto:hola@curahi.bo" method="POST" enctype="text/plain" class="mt-12 grid gap-6 text-left max-w-3xl mx-auto">
-            </form>
         </div>
     </div>
+    
+    <!-- Script para animaciones de entrada -->
+    <script>
+        // Observador de intersección para animaciones al scroll
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, 0);
+                    }
+                });
+            },
+            { threshold: 0.1 }
+        );
+
+        // Observar elementos
+        document.querySelectorAll('.fade-up').forEach((el) => {
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 1s cubic-bezier(0.4, 0, 0.2, 1)';
+            observer.observe(el);
+        });
+    </script>
 </section>
+
+<style>
+/* Sección general */
+.contact-section {
+    position: relative;
+}
+
+/* Partículas sutiles */
+.particles-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.3);
+    z-index: 1;
+}
+
+.particle-1 {
+    width: 6px;
+    height: 6px;
+    top: 20%;
+    left: 10%;
+    animation: float 20s infinite ease-in-out;
+}
+
+.particle-2 {
+    width: 8px;
+    height: 8px;
+    top: 70%;
+    left: 20%;
+    animation: float 25s infinite ease-in-out reverse;
+}
+
+.particle-3 {
+    width: 5px;
+    height: 5px;
+    top: 40%;
+    left: 85%;
+    animation: float 18s infinite ease-in-out;
+}
+
+.particle-4 {
+    width: 7px;
+    height: 7px;
+    top: 80%;
+    left: 70%;
+    animation: float 22s infinite ease-in-out;
+}
+
+.particle-5 {
+    width: 4px;
+    height: 4px;
+    top: 15%;
+    left: 60%;
+    animation: float 15s infinite ease-in-out reverse;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translate(0, 0);
+    }
+    25% {
+        transform: translate(50px, 30px);
+    }
+    50% {
+        transform: translate(20px, 60px);
+    }
+    75% {
+        transform: translate(-30px, 30px);
+    }
+}
+
+/* Texto con gradiente estático (sin desvanecerse) */
+.gradient-text-static {
+    background: linear-gradient(135deg, #ffffff, #ffb088);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    display: inline-block;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+/* Botones rediseñados */
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1.125rem;
+    padding: 0.875rem 2rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    min-width: 200px;
+}
+
+.primary-button {
+    background-color: #1c1c1c;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.primary-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+}
+
+.secondary-button {
+    background-color: transparent;
+    color: #1c1c1c;
+    border: 2px solid #1c1c1c;
+}
+
+.secondary-button:hover {
+    transform: translateY(-2px);
+    background-color: rgba(28, 28, 28, 0.1);
+}
+
+/* Contenedor de información de contacto simplificado */
+.contact-info-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 16px;
+    padding: 1.5rem;
+}
+
+/* Items de contacto */
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: transform 0.3s ease;
+}
+
+.contact-item:hover {
+    transform: translateY(-2px);
+}
+
+/* Iconos simplificados */
+.icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(28, 28, 28, 0.9);
+    border-radius: 8px;
+}
+
+.contact-icon {
+    width: 20px;
+    height: 20px;
+    color: white;
+}
+
+.info-text {
+    color: #1c1c1c;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .contact-info-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+    
+    .cta-button {
+        min-width: 160px;
+        font-size: 1rem;
+        padding: 0.75rem 1.5rem;
+    }
+}
+</style>

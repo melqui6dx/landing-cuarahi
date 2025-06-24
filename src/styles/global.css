@@ -403,6 +403,11 @@ body::before {
   animation: float-gentle 6s ease-in-out infinite;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  /* Mobile performance optimizations */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform;
 }
 
 .icon-float-makerspace {
@@ -571,6 +576,14 @@ footer {
     display: none;
   }
   
+  /* Center navbar on mobile */
+  .nav-container {
+    margin: 0 var(--space-sm);
+    max-width: calc(100% - 2rem);
+    justify-content: center;
+    text-align: center;
+  }
+  
   .section-padding {
     padding: var(--space-xl) var(--space-sm);
   }
@@ -584,22 +597,189 @@ footer {
   .icon-float {
     width: 64px;
     height: 64px;
+    /* Enhanced mobile animation performance */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    will-change: transform;
   }
   
+  /* Ensure mobile animations match desktop but with optimizations */
+  .glass-card {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    will-change: transform, opacity;
+  }
+  
+  .glass-card:hover {
+    transform: translateY(-4px) translateZ(0);
+  }
+  
+  /* Mobile-optimized button animations */
   .btn-primary,
   .btn-secondary {
     font-size: 1rem;
     padding: var(--space-sm) var(--space-md);
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    will-change: transform;
+  }
+  
+  .btn-primary:hover,
+  .btn-secondary:hover {
+    transform: translateY(-2px) translateZ(0);
+  }
+  
+  /* Mobile-optimized reveal animations */
+  .reveal-element {
+    transform: translateY(20px) translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    will-change: transform, opacity;
+  }
+  
+  .reveal-element.revealed {
+    transform: translateY(0) translateZ(0);
+  }
+  
+  /* Mobile touch optimization */
+  .glass-card,
+  .btn-primary,
+  .btn-secondary,
+  .social-icon {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
   }
 }
 
 @media (max-width: 480px) {
   .nav-container {
     padding: var(--space-xs) var(--space-md);
+    margin: 0 var(--space-xs);
+    max-width: calc(100% - 1rem);
   }
   
   .glass-card {
     padding: var(--space-md);
+  }
+  
+  /* Additional mobile-specific optimizations */
+  .heading-giant {
+    font-size: clamp(2.5rem, 8vw, 4rem);
+  }
+  
+  .heading-xl {
+    font-size: clamp(2rem, 6vw, 3rem);
+  }
+}
+
+/* ===== MOBILE PERFORMANCE ENHANCEMENTS ===== */
+@media (hover: none) and (pointer: coarse) {
+  /* Touch device optimizations */
+  .glass-card:hover,
+  .btn-primary:hover,
+  .btn-secondary:hover,
+  .social-icon:hover {
+    transform: none !important;
+  }
+  
+  /* Use :active for touch feedback instead of :hover */
+  .glass-card:active {
+    transform: translateY(-2px) translateZ(0);
+    transition: transform 0.1s ease;
+  }
+  
+  .btn-primary:active,
+  .btn-secondary:active {
+    transform: translateY(-1px) translateZ(0);
+    transition: transform 0.1s ease;
+  }
+  
+  .social-icon:active {
+    transform: translateY(-1px) translateZ(0);
+    transition: transform 0.1s ease;
+  }
+}
+
+/* ===== iOS SPECIFIC OPTIMIZATIONS ===== */
+@supports (-webkit-appearance: none) {
+  .glass-card,
+  .btn-primary,
+  .btn-secondary,
+  .icon-float {
+    -webkit-transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+  }
+  
+  /* Optimize backdrop-filter for iOS */
+  .nav-container,
+  .glass-card {
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+  }
+}
+
+/* ===== ANDROID SPECIFIC OPTIMIZATIONS ===== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: 0.001dpcm) {
+  .glass-card,
+  .btn-primary,
+  .btn-secondary {
+    /* Reduce blur for better Android performance */
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+  }
+}
+
+/* ===== MOBILE DEVICE CLASS OPTIMIZATIONS ===== */
+.mobile-device .glass-card:hover,
+.mobile-device .btn-primary:hover,
+.mobile-device .btn-secondary:hover,
+.mobile-device .social-icon:hover,
+.mobile-device .nav-link:hover {
+  transform: none !important;
+  background: inherit !important;
+}
+
+.mobile-device .glass-card:active,
+.mobile-device .btn-primary:active,
+.mobile-device .btn-secondary:active,
+.mobile-device .social-icon:active {
+  transform: scale(0.98) translateZ(0) !important;
+  transition: transform 0.1s ease !important;
+}
+
+/* ===== PERFORMANCE OPTIMIZATIONS FOR ALL ANIMATIONS ===== */
+.glass-card,
+.btn-primary,
+.btn-secondary,
+.social-icon,
+.icon-float,
+.reveal-element {
+  contain: layout style paint;
+  isolation: isolate;
+}
+
+/* ===== MOBILE TYPOGRAPHY OPTIMIZATIONS ===== */
+@media (max-width: 768px) {
+  body {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  
+  .text-gradient {
+    /* Fallback for mobile devices that struggle with background-clip */
+    background-attachment: fixed;
+  }
+  
+  /* Simplify gradients on mobile for better performance */
+  .text-gradient-blue,
+  .text-gradient-warm {
+    background-attachment: fixed;
   }
 }
 

@@ -108,6 +108,11 @@ const {
             }
 
             if (!prefersReducedMotion) {
+                // Detect mobile devices for optimized parallax
+                const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+                                window.innerWidth < 768 || 
+                                ('ontouchstart' in window);
+                
                 // PARALLAX MEJORADO Y CONTROLADO para Hero
                 const parallaxElements = {
                     slow: document.querySelectorAll<HTMLElement>('.parallax-bg-slow'),
@@ -131,42 +136,45 @@ const {
                     if (heroRect.bottom > 0 && heroRect.top < window.innerHeight) {
                         const scrollProgress = Math.min(scrolled / heroHeight, 1);
                         
+                        // Reduce parallax intensity on mobile for better performance
+                        const mobileMultiplier = isMobile ? 0.5 : 1;
+                        
                         // Parallax suave para elementos de fondo (se mueven hacia arriba lentamente)
                         parallaxElements.slow.forEach(el => {
-                            const speed = -0.1; // Muy lento, hacia arriba
-                            el.style.transform = `translateY(${scrolled * speed}px)`;
+                            const speed = -0.1 * mobileMultiplier; // Muy lento, hacia arriba
+                            el.style.transform = `translate3d(0, ${scrolled * speed}px, 0)`;
                         });
                         
                         // Parallax medio para elementos decorativos
                         parallaxElements.medium.forEach(el => {
-                            const speed = -0.2; // Lento-medio, hacia arriba
-                            el.style.transform = `translateY(${scrolled * speed}px)`;
+                            const speed = -0.2 * mobileMultiplier; // Lento-medio, hacia arriba
+                            el.style.transform = `translate3d(0, ${scrolled * speed}px, 0)`;
                         });
                         
                         // Parallax rápido para partículas flotantes
                         parallaxElements.fast.forEach(el => {
-                            const speed = -0.35; // Medio-rápido, hacia arriba
-                            el.style.transform = `translateY(${scrolled * speed}px)`;
+                            const speed = -0.35 * mobileMultiplier; // Medio-rápido, hacia arriba
+                            el.style.transform = `translate3d(0, ${scrolled * speed}px, 0)`;
                         });
                         
                         // Parallax inverso para el contenido (se mueve hacia abajo lentamente)
                         parallaxElements.content.forEach(el => {
-                            const speed = 0.05; // Muy lento, hacia abajo para efecto profundidad
-                            el.style.transform = `translateY(${scrolled * speed}px)`;
+                            const speed = 0.05 * mobileMultiplier; // Muy lento, hacia abajo para efecto profundidad
+                            el.style.transform = `translate3d(0, ${scrolled * speed}px, 0)`;
                         });
                         
                         // Ondas de conexión que fluyen hacia SpacesSection
                         parallaxElements.waves.forEach(el => {
-                        const speed = 0.15;
+                        const speed = 0.15 * mobileMultiplier;
                         const opacity = Math.max(0.3, 1 - scrollProgress * 0.7);
-                        el.style.transform = `translateY(${scrolled * speed}px)`;
+                        el.style.transform = `translate3d(0, ${scrolled * speed}px, 0)`;
                         el.style.opacity = `${opacity}`;
                         });
                     } else {
                         // Resetear transformaciones si el hero no está visible
                         Object.values(parallaxElements).forEach(group => {
                             group.forEach(el => {
-                                el.style.transform = 'translateY(0)';
+                                el.style.transform = 'translate3d(0, 0, 0)';
                                 el.style.opacity = '1';
                             });
                         });
@@ -184,7 +192,31 @@ const {
             }
 
             // Escuchar scroll con throttling para performance
-            window.addEventListener('scroll', requestParallaxUpdate, { passive: true });
+            // Use less frequent updates on mobile devices
+            if (isMobile) {
+                let timeout: NodeJS.Timeout;
+                window.addEventListener('scroll', () => {
+                    clearTimeout(timeout);
+                    timeout = setTimeout(requestParallaxUpdate, 16); // ~60fps
+                }, { passive: true });
+            } else {
+                window.addEventListener('scroll', requestParallaxUpdate, { passive: true });
+            }
+            }
+            
+            // Mobile-specific performance optimizations
+            if (isMobile) {
+                // Optimize for mobile devices
+                document.body.style.webkitOverflowScrolling = 'touch';
+                
+                // Disable hover effects on mobile
+                document.body.classList.add('mobile-device');
+                
+                // Optimize viewport for mobile
+                const viewport = document.querySelector('meta[name="viewport"]') as HTMLMetaElement;
+                if (viewport) {
+                    viewport.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover';
+                }
             }
         });
     </script>

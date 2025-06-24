@@ -91,13 +91,14 @@ const spaces = [
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            if (entry.target.id === 'section-header') {
-              entry.target.style.opacity = '1';
-              entry.target.style.transform = 'translateY(0)';
+            const target = entry.target as HTMLElement;
+            if (target.id === 'section-header') {
+              target.style.opacity = '1';
+              target.style.transform = 'translateY(0)';
             } else {
               setTimeout(() => {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
+                target.style.opacity = '1';
+                target.style.transform = 'translateY(0)';
               }, 150);
             }
           }
@@ -108,8 +109,9 @@ const spaces = [
 
     // Observar elementos
     document.querySelectorAll('.space-card-reveal, #section-header').forEach((el) => {
-      el.style.transform = 'translateY(30px)';
-      observer.observe(el);
+      const element = el as HTMLElement;
+      element.style.transform = 'translateY(30px)';
+      observer.observe(element);
     });
   </script>
 </section>

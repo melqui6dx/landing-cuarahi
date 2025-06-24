@@ -88,8 +88,8 @@
 <script>
     // Script para controlar la visibilidad del banner según la posición de scroll
     document.addEventListener('DOMContentLoaded', function() {
-        const topBanner = document.querySelector('.top-banner');
-        const navbar = document.querySelector('.navbar-eco');
+        const topBanner = document.querySelector('.top-banner') as HTMLElement;
+        const navbar = document.querySelector('.navbar-eco') as HTMLElement;
         
         if (!topBanner || !navbar) return;
         
@@ -100,7 +100,7 @@
         function updateBannerVisibility() {
             const scrollY = window.scrollY;
             // Usamos querySelector con operador opcional para mayor compatibilidad
-            const heroSection = document.querySelector('.hero-section');
+            const heroSection = document.querySelector('.hero-section') as HTMLElement;
             const heroHeight = heroSection ? heroSection.offsetHeight : 0;
             
             // Si estamos al inicio de la página (en el hero), mostrar banner

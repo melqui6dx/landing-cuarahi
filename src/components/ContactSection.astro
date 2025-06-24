@@ -80,8 +80,9 @@ const contactInfo = [
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
                         setTimeout(() => {
-                            entry.target.style.opacity = '1';
-                            entry.target.style.transform = 'translateY(0)';
+                            const target = entry.target as HTMLElement;
+                            target.style.opacity = '1';
+                            target.style.transform = 'translateY(0)';
                         }, 0);
                     }
                 });
@@ -91,9 +92,10 @@ const contactInfo = [
 
         // Observar elementos
         document.querySelectorAll('.fade-up').forEach((el) => {
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'all 1s cubic-bezier(0.4, 0, 0.2, 1)';
-            observer.observe(el);
+            const element = el as HTMLElement;
+            element.style.transform = 'translateY(30px)';
+            element.style.transition = 'all 1s cubic-bezier(0.4, 0, 0.2, 1)';
+            observer.observe(element);
         });
     </script>
 </section>

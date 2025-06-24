@@ -148,14 +148,18 @@
         document.querySelectorAll('.footer-link').forEach(link => {
             link.addEventListener('mouseenter', () => {
                 const color = link.getAttribute('data-color') || '#ffffff';
-                const indicator = link.querySelector('.link-indicator');
-                indicator.style.backgroundColor = color;
-                indicator.style.width = '100%';
+                const indicator = link.querySelector('.link-indicator') as HTMLElement;
+                if (indicator) {
+                    indicator.style.backgroundColor = color;
+                    indicator.style.width = '100%';
+                }
             });
             
             link.addEventListener('mouseleave', () => {
-                const indicator = link.querySelector('.link-indicator');
-                indicator.style.width = '0';
+                const indicator = link.querySelector('.link-indicator') as HTMLElement;
+                if (indicator) {
+                    indicator.style.width = '0';
+                }
             });
         });
     </script>

@@ -127,8 +127,9 @@ const stats = [
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
                         setTimeout(() => {
-                            entry.target.style.opacity = '1';
-                            entry.target.style.transform = 'translateY(0)';
+                            const target = entry.target as HTMLElement;
+                            target.style.opacity = '1';
+                            target.style.transform = 'translateY(0)';
                         }, entry.target.id === 'about-text' ? 0 : 150);
                     }
                 });
@@ -138,9 +139,10 @@ const stats = [
 
         // Observar elementos
         document.querySelectorAll('.fade-up').forEach((el) => {
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'all 1s cubic-bezier(0.4, 0, 0.2, 1)';
-            observer.observe(el);
+            const element = el as HTMLElement;
+            element.style.transform = 'translateY(30px)';
+            element.style.transition = 'all 1s cubic-bezier(0.4, 0, 0.2, 1)';
+            observer.observe(element);
         });
         
         // Animación de elementos 3D en paralaje
@@ -155,14 +157,15 @@ const stats = [
             
             // Aplicar efecto paralaje a los elementos 3D
             document.querySelectorAll('.floating-cube, .floating-sphere').forEach(el => {
-                const depth = parseFloat(el.getAttribute('data-depth') || '1');
+                const element = el as HTMLElement;
+                const depth = parseFloat(element.getAttribute('data-depth') || '1');
                 const x = moveX * depth;
                 const y = moveY * depth;
-                el.style.transform = `translate3d(${x}px, ${y}px, 0) rotate3d(${moveY/10}, ${-moveX/10}, 0, 12deg)`;
+                element.style.transform = `translate3d(${x}px, ${y}px, 0) rotate3d(${moveY/10}, ${-moveX/10}, 0, 12deg)`;
             });
             
             // Efecto de paralaje en la tarjeta de características
-            const featuresCard = document.querySelector('.features-card');
+            const featuresCard = document.querySelector('.features-card') as HTMLElement;
             if (featuresCard) {
                 featuresCard.style.transform = `translate3d(${moveX * 0.3}px, ${moveY * 0.3}px, 0) rotateX(${moveY * 0.05}deg) rotateY(${-moveX * 0.05}deg)`;
             }

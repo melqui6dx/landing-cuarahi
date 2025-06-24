@@ -238,20 +238,6 @@ const isHomePage = currentPath === '/' || currentPath === '';
 }
 
 /* ===== NAVBAR CENTRAL ===== */
-.navbar-center {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    background: var(--eco-glass);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid var(--eco-glass-border);
-    border-radius: 50px;
-    padding: 0.75rem 1.5rem;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    justify-self: center;
-}
 
 .navbar-center:hover {
     background: var(--eco-glass-hover);
@@ -599,15 +585,18 @@ document.addEventListener('DOMContentLoaded', function() {
             if (isOpen) {
                 mobileMenu.classList.add('show', 'animate-slide-down');
                 // Animar hamburguesa a X
-                hamburgerLines[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
-                hamburgerLines[1].style.opacity = '0';
-                hamburgerLines[2].style.transform = 'rotate(-45deg) translate(6px, -6px)';
+                if (hamburgerLines[0]) (hamburgerLines[0] as HTMLElement).style.transform = 'rotate(45deg) translate(6px, 6px)';
+                if (hamburgerLines[1]) (hamburgerLines[1] as HTMLElement).style.opacity = '0';
+                if (hamburgerLines[2]) (hamburgerLines[2] as HTMLElement).style.transform = 'rotate(-45deg) translate(6px, -6px)';
             } else {
                 mobileMenu.classList.remove('show', 'animate-slide-down');
                 // Restaurar hamburguesa
                 hamburgerLines.forEach(line => {
-                    (line as HTMLElement).style.transform = '';
-                    (line as HTMLElement).style.opacity = '';
+                    const element = line as HTMLElement;
+                    if (element) {
+                        element.style.transform = '';
+                        element.style.opacity = '';
+                    }
                 });
             }
         });
@@ -620,8 +609,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 mobileMenuButton.setAttribute('aria-expanded', 'false');
                 mobileMenu.classList.remove('show', 'animate-slide-down');
                 hamburgerLines.forEach(line => {
-                    (line as HTMLElement).style.transform = '';
-                    (line as HTMLElement).style.opacity = '';
+                    const element = line as HTMLElement;
+                    if (element) {
+                        element.style.transform = '';
+                        element.style.opacity = '';
+                    }
                 });
             });
         });
@@ -635,8 +627,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     mobileMenuButton.setAttribute('aria-expanded', 'false');
                     mobileMenu.classList.remove('show', 'animate-slide-down');
                     hamburgerLines.forEach(line => {
-                        (line as HTMLElement).style.transform = '';
-                        (line as HTMLElement).style.opacity = '';
+                        const element = line as HTMLElement;
+                        if (element) {
+                            element.style.transform = '';
+                            element.style.opacity = '';
+                        }
                     });
                 }
             }

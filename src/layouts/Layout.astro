@@ -217,7 +217,48 @@ const {
                 if (viewport) {
                     viewport.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover';
                 }
+                
+                // Force full width coverage
+                document.documentElement.style.width = '100vw';
+                document.documentElement.style.maxWidth = '100vw';
+                document.documentElement.style.overflowX = 'hidden';
+                document.body.style.width = '100vw';
+                document.body.style.maxWidth = '100vw';
+                document.body.style.overflowX = 'hidden';
             }
+            
+            // Detect zoom changes and adjust layout
+            let currentZoom = 1;
+            
+            function detectZoom() {
+                const newZoom = Math.round(window.devicePixelRatio * 100) / 100;
+                if (newZoom !== currentZoom) {
+                    currentZoom = newZoom;
+                    
+                    // Force layout recalculation on zoom change
+                    document.body.style.width = '100vw';
+                    document.body.style.minWidth = '100vw';
+                    document.body.style.maxWidth = '100vw';
+                    
+                    // Ensure sections maintain full width
+                    const sections = document.querySelectorAll('.section-padding');
+                    sections.forEach(section => {
+                        const sectionEl = section as HTMLElement;
+                        sectionEl.style.width = '100vw';
+                        sectionEl.style.marginLeft = 'calc(50% - 50vw)';
+                        sectionEl.style.marginRight = 'calc(50% - 50vw)';
+                    });
+                }
+            }
+            
+            // Monitor for zoom changes and orientation changes
+            window.addEventListener('resize', detectZoom);
+            window.addEventListener('orientationchange', () => {
+                setTimeout(detectZoom, 100);
+            });
+            
+            // Initial detection
+            detectZoom();
         });
     </script>
 </body>

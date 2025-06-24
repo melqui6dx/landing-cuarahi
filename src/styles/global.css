@@ -72,6 +72,10 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  /* Prevent horizontal scrolling and ensure full coverage */
+  width: 100%;
+  min-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -83,6 +87,10 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Ensure full width coverage */
+  width: 100%;
+  min-width: 100vw;
+  position: relative;
 }
 
 /* ===== TEXTURA DE RUIDO GLOBAL ===== */
@@ -93,6 +101,8 @@ body::before {
   left: 0;
   width: 100vw;
   height: 100vh;
+  min-width: 100%;
+  min-height: 100%;
   opacity: 0.03;
   pointer-events: none;
   z-index: 1;
@@ -514,12 +524,17 @@ body::before {
 /* ===== LAYOUTS Y GRIDS ===== */
 .section-padding {
   padding: var(--space-3xl) var(--space-md);
+  width: 100%;
+  min-width: 100%;
+  box-sizing: border-box;
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 var(--space-md);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .grid-spaces {
@@ -572,6 +587,20 @@ footer {
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
+  /* Ensure full width coverage on mobile */
+  body {
+    width: 100vw;
+    min-width: 100vw;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+  
+  /* Fix any potential margin/padding issues */
+  * {
+    max-width: 100vw;
+    box-sizing: border-box;
+  }
+  
   .nav-links {
     display: none;
   }
@@ -579,13 +608,28 @@ footer {
   /* Center navbar on mobile */
   .nav-container {
     margin: 0 var(--space-sm);
-    max-width: calc(100% - 2rem);
+    max-width: calc(100vw - 2rem);
+    width: calc(100vw - 2rem);
     justify-content: center;
     text-align: center;
+    box-sizing: border-box;
   }
   
   .section-padding {
     padding: var(--space-xl) var(--space-sm);
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    box-sizing: border-box;
+  }
+  
+  .container {
+    width: 100%;
+    max-width: 100vw;
+    padding: 0 var(--space-sm);
+    margin: 0 auto;
+    box-sizing: border-box;
   }
   
   .grid-spaces,
@@ -660,11 +704,14 @@ footer {
   .nav-container {
     padding: var(--space-xs) var(--space-md);
     margin: 0 var(--space-xs);
-    max-width: calc(100% - 1rem);
+    max-width: calc(100vw - 1rem);
+    width: calc(100vw - 1rem);
   }
   
   .glass-card {
     padding: var(--space-md);
+    width: 100%;
+    max-width: 100%;
   }
   
   /* Additional mobile-specific optimizations */
@@ -674,6 +721,15 @@ footer {
   
   .heading-xl {
     font-size: clamp(2rem, 6vw, 3rem);
+  }
+  
+  /* Ensure all content stays within viewport */
+  .section-padding {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding-left: var(--space-xs);
+    padding-right: var(--space-xs);
   }
 }
 
@@ -780,6 +836,59 @@ footer {
   .text-gradient-blue,
   .text-gradient-warm {
     background-attachment: fixed;
+  }
+}
+
+/* ===== ZOOM AND VIEWPORT FIXES ===== */
+@media (min-width: 320px) and (max-width: 768px) {
+  /* Force full width coverage on all mobile devices */
+  html, body {
+    width: 100vw !important;
+    min-width: 100vw !important;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+    position: relative;
+  }
+  
+  /* Prevent any element from causing horizontal scroll */
+  * {
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* Full-width sections */
+  section, main, div[class*="section"], article {
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow-x: hidden;
+  }
+}
+
+/* ===== ZOOM OUT PROTECTION ===== */
+@media (max-zoom: 0.8) {
+  body {
+    width: 100vw !important;
+    min-width: 100vw !important;
+  }
+  
+  .section-padding {
+    width: 100vw !important;
+    margin-left: calc(50% - 50vw) !important;
+    margin-right: calc(50% - 50vw) !important;
+  }
+}
+
+/* ===== LANDSCAPE MOBILE FIXES ===== */
+@media (max-width: 768px) and (orientation: landscape) {
+  body {
+    width: 100vw !important;
+    min-width: 100vw !important;
+    overflow-x: hidden !important;
+  }
+  
+  .nav-container {
+    width: calc(100vw - 2rem) !important;
+    max-width: calc(100vw - 2rem) !important;
   }
 }
 

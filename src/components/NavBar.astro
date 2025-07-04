@@ -40,11 +40,7 @@ const isHomePage = currentPath === '/' || currentPath === '';
             <!-- Logo -->
             <a href="/" class="logo-container">
                 <div class="logo-glass-nav">
-                    <!-- Logo SVG simplificado -->
-                    <svg class="logo-svg-nav" viewBox="0 0 489.45 519.08" xmlns="http://www.w3.org/2000/svg">
-                        <path fill="#fe3a14" d="M489.45.04c-.32,60.53-27.96,121.12-85.65,145.86-50.96,21.86-119.15,6.28-173.84,11.16-14.88,1.33-35.42,12.75-46.04,22.96-57.5,55.27-30.3,179.47,54.99,185.06,40.32,2.64,83.53-2.21,124.08-.08,7.97.42,17.55,2.38,24.71,4.29,67.61,18.05,101.87,82.81,101.75,149.75l-275.55.04c-282.46-20.93-287.94-500.6,0-519.08l275.55.04Z"/>
-                        <path fill="#f7931e" d="M271.35,249.7c.85-3.54,1.51-7.15,2.16-10.63,2.1-11.34,4.27-23.08,12.86-36.3,7.38-11.36,17.69-20.96,30.75-28.7-8.18-2.49-16.85-3.84-25.84-3.84-5.1,0-10.01.44-14.7,1.28-5.73,4.86-10.56,10.26-14.42,16.21-7.4,11.39-9.29,21.57-11.28,32.34-.67,3.62-1.36,7.36-2.27,11.18-5.42,22.66-17.9,44.39-37.19,64.86,4.07,8.04,9.53,15.8,16.14,22.74,23.29-21.74,38.01-44.96,43.79-69.12Z"/>
-                    </svg>
+                    <img src="/assets/logo-blanco.webp" alt="Cuarahí Logo" class="logo-img-nav" />
                 </div>
                 <span class="brand-text-nav">cuarahí</span>
             </a>
@@ -112,9 +108,11 @@ const isHomePage = currentPath === '/' || currentPath === '';
     --eco-glass: rgba(255, 255, 255, 0.08);
     --eco-glass-border: rgba(255, 255, 255, 0.12);
     --eco-glass-hover: rgba(255, 255, 255, 0.12);
-    --eco-blue: #3b82f6;
-    --eco-orange: #fe3a14;
-    --eco-yellow: #f7931e;
+    --cuarahi-blue: #1E40AF;
+    --cuarahi-blue-light: #3B82F6;
+    --cuarahi-red: #DC2626;
+    --cuarahi-red-light: #EF4444;
+    --cuarahi-cyan: #0EA5E9;
     --text-primary: #ffffff;
     --text-secondary: rgba(255, 255, 255, 0.8);
     --text-tertiary: rgba(255, 255, 255, 0.6);
@@ -134,13 +132,13 @@ const isHomePage = currentPath === '/' || currentPath === '';
 }
 
 .banner-link {
-    color: var(--eco-yellow);
+    color: var(--cuarahi-cyan);
     text-decoration: underline;
     transition: all 0.2s ease;
 }
 
 .banner-link:hover {
-    color: #fcd34d;
+    color: var(--cuarahi-blue-light);
     text-decoration: none;
 }
 
@@ -231,7 +229,7 @@ const isHomePage = currentPath === '/' || currentPath === '';
 }
 
 .external-link:hover {
-    color: var(--eco-yellow);
+    color: var(--cuarahi-blue-light);
     background: rgba(255, 255, 255, 0.05);
 }
 
@@ -256,20 +254,80 @@ const isHomePage = currentPath === '/' || currentPath === '';
     transform: scale(1.02);
 }
 
+.logo-container:hover .logo-glass-nav {
+    background: linear-gradient(135deg, 
+        rgba(30, 64, 175, 0.25) 0%,
+        rgba(220, 38, 38, 0.25) 50%,
+        rgba(14, 165, 233, 0.25) 100%
+    );
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 
+        0 6px 25px rgba(0, 0, 0, 0.3),
+        0 0 30px rgba(30, 64, 175, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+}
+
+.logo-container:hover .logo-img-nav {
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.8)) 
+            drop-shadow(0 0 30px rgba(30, 64, 175, 0.6))
+            drop-shadow(0 0 40px rgba(14, 165, 233, 0.4));
+    transform: scale(1.05);
+}
+
+.logo-glass-nav::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: conic-gradient(from 0deg,
+        rgba(30, 64, 175, 0.3) 0deg,
+        rgba(220, 38, 38, 0.3) 120deg,
+        rgba(14, 165, 233, 0.3) 240deg,
+        rgba(30, 64, 175, 0.3) 360deg
+    );
+    border-radius: 10px;
+    filter: blur(8px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.logo-container:hover .logo-glass-nav::before {
+    opacity: 0.6;
+}
+
 .logo-glass-nav {
     width: 32px;
     height: 32px;
-    border-radius: 8px;
-    background: linear-gradient(135deg, rgba(254, 58, 20, 0.2), rgba(247, 147, 30, 0.2));
+    border-radius: 10px;
+    background: linear-gradient(135deg, 
+        rgba(30, 64, 175, 0.15) 0%,
+        rgba(220, 38, 38, 0.15) 50%,
+        rgba(14, 165, 233, 0.15) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+        0 4px 15px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
-.logo-svg-nav {
-    width: 18px;
-    height: 18px;
+.logo-img-nav {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.6)) 
+            drop-shadow(0 0 20px rgba(30, 64, 175, 0.4));
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
 }
 
 .brand-text-nav {
@@ -332,8 +390,8 @@ const isHomePage = currentPath === '/' || currentPath === '';
     position: absolute;
     inset: 0;
     background: linear-gradient(135deg, 
-        rgba(59, 130, 246, 0.1) 0%, 
-        rgba(249, 115, 22, 0.1) 100%);
+        rgba(30, 64, 175, 0.1) 0%, 
+        rgba(220, 38, 38, 0.1) 100%);
     opacity: 0;
     transition: opacity 0.3s ease;
     border-radius: 25px;
@@ -345,7 +403,7 @@ const isHomePage = currentPath === '/' || currentPath === '';
     transform: translateY(-1px);
     box-shadow: 
         0 6px 25px rgba(0, 0, 0, 0.3),
-        0 0 0 1px rgba(59, 130, 246, 0.2),
+        0 0 0 1px rgba(30, 64, 175, 0.2),
         inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
@@ -416,7 +474,7 @@ const isHomePage = currentPath === '/' || currentPath === '';
 }
 
 .mobile-nav-link--cta {
-    background: linear-gradient(135deg, var(--eco-blue), var(--eco-orange));
+    background: linear-gradient(135deg, var(--cuarahi-blue), var(--cuarahi-red));
     color: white;
     font-weight: 600;
     text-align: center;
@@ -440,7 +498,7 @@ const isHomePage = currentPath === '/' || currentPath === '';
 }
 
 .mobile-external-link:hover {
-    color: var(--eco-yellow);
+    color: var(--cuarahi-blue-light);
 }
 
 /* ===== ESTADOS DE SCROLL ===== */
@@ -547,9 +605,9 @@ const isHomePage = currentPath === '/' || currentPath === '';
         height: 28px;
     }
     
-    .logo-svg-nav {
-        width: 16px;
-        height: 16px;
+    .logo-img-nav {
+        width: 18px;
+        height: 18px;
     }
 }
 
@@ -566,7 +624,7 @@ const isHomePage = currentPath === '/' || currentPath === '';
 .nav-link:focus,
 .external-link:focus,
 .mobile-nav-link:focus {
-    outline: 2px solid var(--eco-blue);
+    outline: 2px solid var(--cuarahi-blue);
     outline-offset: 2px;
 }
 </style>

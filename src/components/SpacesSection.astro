@@ -9,7 +9,6 @@ const spaces = [
         href: "/makerspace",
         icon: "M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z",
         tagline: "Crear • Prototipar • Innovar",
-        color: "yellow" as const,
         delay: "0s",
         logoIcon: "M0 0h24v24H0z"
     },
@@ -19,7 +18,6 @@ const spaces = [
         href: "/devspace",
         icon: "M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4",
         tagline: "Desarrollar • Colaborar • Escalar",
-        color: "orange" as const,
         delay: "0.3s",
         logoIcon: "M0 0h24v24H0z"
     },
@@ -29,7 +27,6 @@ const spaces = [
         href: "/eduspace",
         icon: "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253",
         tagline: "Enseñar • Aprender • Crecer",
-        color: "red" as const,
         delay: "0.6s",
         logoIcon: "M0 0h24v24H0z"
     }
@@ -41,16 +38,16 @@ const spaces = [
   <div class="absolute inset-0 bg-gradient-to-b from-[#0f1419] to-[#0d1117] opacity-90"></div>
   <div class="absolute inset-0 noise-texture opacity-[0.03]"></div>
   
-  <!-- Elementos decorativos de fondo que respetan la identidad visual de Cuarahi -->
-  <div class="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-gradient-to-br from-[#ff5200]/10 to-transparent blur-3xl"></div>
-  <div class="absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-gradient-to-tr from-[#3b82f6]/10 to-transparent blur-3xl"></div>
-  <div class="absolute top-1/4 left-20 h-72 w-72 rounded-full bg-gradient-to-tr from-[#ffbc0d]/10 to-transparent blur-3xl"></div>
+  <!-- Elementos decorativos de fondo con nueva paleta neutral -->
+  <div class="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-gradient-to-br from-white/5 to-transparent blur-3xl"></div>
+  <div class="absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-gradient-to-tr from-[#DC2626]/8 to-transparent blur-3xl"></div>
+  <div class="absolute top-1/4 left-20 h-72 w-72 rounded-full bg-gradient-to-tr from-white/3 to-transparent blur-3xl"></div>
   
   <div class="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
     <!-- Encabezado de sección -->
     <div class="mb-24 text-center opacity-0 transition-all duration-1000 ease-out" id="section-header">
       <h2 class="heading-xl mb-6 text-white">
-        Nuestros <span class="bg-gradient-to-r from-[#ff5200] to-[#ffbc0d] bg-clip-text text-transparent">Espacios</span>
+        Nuestros <span class="bg-gradient-to-r from-[#DC2626] to-[#FF6B1A] bg-clip-text text-transparent">Espacios</span>
       </h2>
       <p class="mx-auto max-w-3xl text-2xl leading-relaxed text-white/80">
         Tres universos de posibilidades infinitas para tu crecimiento profesional y personal
@@ -76,7 +73,6 @@ const spaces = [
             href={space.href}
             icon={space.icon}
             tagline={space.tagline}
-            color={space.color}
             delay={space.delay}
           />
         </div>

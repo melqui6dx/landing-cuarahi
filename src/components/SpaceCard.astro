@@ -6,68 +6,45 @@ export interface Props {
   href: string;
   icon: string;
   tagline: string;
-  color: 'yellow' | 'orange' | 'red';
+  color?: 'neutral';
   delay?: string;
 }
 
-const { title, description, href, icon, tagline, color, delay = '0s' } = Astro.props;
+const { title, description, href, icon, tagline, color = 'neutral', delay = '0s' } = Astro.props;
 
-// Mapeo de colores a variables CSS y clases - ajustado según los logos de Cuarahi
-const colorMap = {
-  yellow: {
-    // MakerSpace - Fondo amarillo con azul oscuro
-    cardBg: 'linear-gradient(135deg, rgba(255, 193, 7, 0.12), rgba(255, 193, 7, 0.05))',
-    borderColor: 'rgba(255, 193, 7, 0.3)',
-    textColor: '#ffbc0d', // Amarillo intenso
-    iconBg: 'rgba(255, 193, 7, 0.15)',
-    iconBorder: 'rgba(255, 193, 7, 0.3)',
-    iconShadow: 'rgba(255, 193, 7, 0.2)',
-    hoverShadow: 'rgba(255, 193, 7, 0.25)',
-    glowColor: '#ffbc0d'
-  },
-  orange: {
-    // DevSpace - Fondo azul oscuro con naranja
-    cardBg: 'linear-gradient(135deg, rgba(255, 82, 0, 0.12), rgba(255, 82, 0, 0.05))',
-    borderColor: 'rgba(255, 82, 0, 0.3)',
-    textColor: '#ff5200', // Naranja intenso
-    iconBg: 'rgba(255, 82, 0, 0.15)',
-    iconBorder: 'rgba(255, 82, 0, 0.3)',
-    iconShadow: 'rgba(255, 82, 0, 0.2)',
-    hoverShadow: 'rgba(255, 82, 0, 0.25)',
-    glowColor: '#ff7e3f'
-  },
-  red: {
-    // EduSpace - Fondo celeste con azul oscuro
-    cardBg: 'linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(191, 219, 254, 0.12))',
-    borderColor: 'rgba(191, 219, 254, 0.5)',  // Borde celeste claro
-    textColor: '#3b82f6', // Azul vivo
-    iconBg: 'rgba(59, 130, 246, 0.15)',
-    iconBorder: 'rgba(191, 219, 254, 0.5)',  // Borde celeste claro para el icono también
-    iconShadow: 'rgba(59, 130, 246, 0.2)',
-    hoverShadow: 'rgba(59, 130, 246, 0.25)',
-    glowColor: '#60a5fa'
-  }
+// Diseño neutral unificado manteniendo la estética glassmorphism
+const neutralStyles = {
+  cardBg: 'linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03))',
+  borderColor: 'rgba(255, 255, 255, 0.15)',
+  textColor: '#ffffff',
+  titleColor: '#ffffff',
+  iconBg: 'rgba(255, 255, 255, 0.1)',
+  iconBorder: 'rgba(255, 255, 255, 0.2)',
+  iconShadow: 'rgba(0, 0, 0, 0.2)',
+  hoverShadow: 'rgba(255, 255, 255, 0.1)',
+  glowColor: 'rgba(255, 255, 255, 0.4)',
+  accentColor: 'var(--cuarahi-red)' // Usa el nuevo rojo como único acento
 };
 
-const styles = colorMap[color];
+const styles = neutralStyles;
 ---
 
 <a href={href} class="group block">
-  <div class="relative overflow-hidden rounded-2xl transition-all duration-500 ease-out hover:-translate-y-2 h-[300px]"
+  <div class="relative overflow-hidden rounded-2xl transition-all duration-500 ease-out hover:-translate-y-2 h-[300px] group-hover:shadow-2xl"
     style={`background: ${styles.cardBg}; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid ${styles.borderColor}; box-shadow: var(--eco-shadow-glass); transition: var(--transition-smooth);`}>
     
-    <!-- Efecto de borde superior animado -->
-    <div class="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-transparent via-current to-transparent opacity-0 transition-all duration-700 ease-out group-hover:opacity-100 group-hover:via-current"
-      style={`--tw-text-opacity: 1; color: ${styles.glowColor};`}></div>
+    <!-- Efecto de borde superior animado con acento rojo -->
+    <div class="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-transparent via-current to-transparent opacity-0 transition-all duration-700 ease-out group-hover:opacity-100"
+      style={`color: ${styles.accentColor};`}></div>
     
     <!-- Contenido principal -->
     <div class="relative z-10 p-8 flex flex-col h-full">
       <!-- Icono flotante -->
       <div class="absolute right-8 top-8" style={`animation: float-gentle 6s ease-in-out infinite; animation-delay: ${delay};`}>
         <div class="flex h-14 w-14 items-center justify-center rounded-xl"
-          style={`background: linear-gradient(135deg, ${styles.iconBg}, rgba(255, 255, 255, 0.05)); border: 1px solid ${styles.iconBorder}; box-shadow: 0 8px 32px ${styles.iconShadow};`}>
+          style={`background: linear-gradient(135deg, ${styles.iconBg}, rgba(255, 255, 255, 0.05)); border: 1px solid ${styles.iconBorder}; box-shadow: 0 8px 32px ${styles.iconShadow}, 0 0 20px rgba(220, 38, 38, 0.1), 0 0 40px rgba(220, 38, 38, 0.05);`}>
           <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-            style={`color: ${styles.textColor};`}>
+            style={`color: ${styles.accentColor}; filter: drop-shadow(0 0 8px rgba(220, 38, 38, 0.4)) drop-shadow(0 0 16px rgba(220, 38, 38, 0.2));`}>
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={icon}></path>
           </svg>
         </div>
@@ -75,7 +52,7 @@ const styles = colorMap[color];
 
       <!-- Texto del card -->
       <div class="mb-auto pt-4">
-        <h3 class="mb-3 text-2xl font-bold tracking-tight" style={`color: ${styles.textColor};`}>{title}</h3>
+        <h3 class="mb-3 text-2xl font-bold tracking-tight" style={`color: ${styles.titleColor}; text-shadow: 0 0 20px rgba(255, 255, 255, 0.3), 0 0 40px rgba(255, 255, 255, 0.1);`}>{title}</h3>
         <p class="text-base leading-relaxed text-white/90 line-clamp-4">
           {description}
         </p>
@@ -83,11 +60,11 @@ const styles = colorMap[color];
       
       <!-- Footer del card con tagline y flecha -->
       <div class="flex items-center justify-between mt-4">
-        <span class="font-medium opacity-90 text-sm" style={`color: ${styles.textColor};`}>{tagline}</span>
+        <span class="font-medium opacity-75 text-sm text-white/80">{tagline}</span>
         <div class="flex h-8 w-8 items-center justify-center rounded-full transition-all duration-300 ease-out group-hover:scale-110"
-          style={`background: ${styles.iconBg}; box-shadow: 0 4px 12px ${styles.iconShadow};`}>
+          style={`background: ${styles.iconBg}; box-shadow: 0 4px 12px ${styles.iconShadow}, 0 0 12px rgba(220, 38, 38, 0.15), 0 0 24px rgba(220, 38, 38, 0.05);`}>
           <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-            style={`color: ${styles.textColor}; transition: transform 0.3s ease-out;`}>
+            style={`color: ${styles.accentColor}; transition: transform 0.3s ease-out; filter: drop-shadow(0 0 6px rgba(220, 38, 38, 0.4)) drop-shadow(0 0 12px rgba(220, 38, 38, 0.2));`}>
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
           </svg>
         </div>
@@ -95,7 +72,6 @@ const styles = colorMap[color];
     </div>
     
     <!-- Overlay de brillo al hacer hover -->
-    <div class="absolute inset-0 bg-gradient-to-br opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-15"
-      style={`background: linear-gradient(135deg, transparent, ${styles.glowColor});`}></div>
+    <div class="absolute inset-0 bg-gradient-to-br from-transparent to-white/5 opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100"></div>
   </div>
 </a>

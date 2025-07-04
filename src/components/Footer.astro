@@ -5,8 +5,8 @@
 <footer class="footer-section relative bg-[#0f1419] border-t border-white/10 overflow-hidden">
     <!-- Efectos de fondo -->
     <div class="absolute top-0 left-0 w-full h-1 footer-gradient-line"></div>
-    <div class="absolute -top-80 -right-80 w-[500px] h-[500px] rounded-full bg-[#ff5200]/5 blur-3xl animate-pulse-slow"></div>
-    <div class="absolute -bottom-80 -left-80 w-[500px] h-[500px] rounded-full bg-[#3b82f6]/5 blur-3xl animate-pulse-slow-delay"></div>
+    <div class="absolute -top-80 -right-80 w-[500px] h-[500px] rounded-full bg-[#DC2626]/5 blur-3xl animate-pulse-slow"></div>
+    <div class="absolute -bottom-80 -left-80 w-[500px] h-[500px] rounded-full bg-white/3 blur-3xl animate-pulse-slow-delay"></div>
     
     <!-- Efecto de partículas -->
     <div class="footer-particles">
@@ -32,12 +32,9 @@
                     <div class="logo-glass">
                         <!-- Aura y efecto de glow -->
                         <div class="logo-aura"></div>
-                        <svg class="logo-svg" viewBox="0 0 489.45 519.08" xmlns="http://www.w3.org/2000/svg">
-                            <path fill="#fe3a14" d="M489.45.04c-.32,60.53-27.96,121.12-85.65,145.86-50.96,21.86-119.15,6.28-173.84,11.16-14.88,1.33-35.42,12.75-46.04,22.96-57.5,55.27-30.3,179.47,54.99,185.06,40.32,2.64,83.53-2.21,124.08-.08,7.97.42,17.55,2.38,24.71,4.29,67.61,18.05,101.87,82.81,101.75,149.75l-275.55.04c-282.46-20.93-287.94-500.6,0-519.08l275.55.04Z"/>
-                            <path fill="#f7931e" d="M271.35,249.7c.85-3.54,1.51-7.15,2.16-10.63,2.1-11.34,4.27-23.08,12.86-36.3,7.38-11.36,17.69-20.96,30.75-28.7-8.18-2.49-16.85-3.84-25.84-3.84-5.1,0-10.01.44-14.7,1.28-5.73,4.86-10.56,10.26-14.42,16.21-7.4,11.39-9.29,21.57-11.28,32.34-.67,3.62-1.36,7.36-2.27,11.18-5.42,22.66-17.9,44.39-37.19,64.86,4.07,8.04,9.53,15.8,16.14,22.74,23.29-21.74,38.01-44.96,43.79-69.12Z"/>
-                        </svg>
+                        <img src="/assets/logo-blanco.webp" alt="Cuarahí Logo" class="logo-img" />
                     </div>
-                    <span class="brand-text" style="color: #ff5200;">Cuarahí</span>
+                    <span class="brand-text" style="color: #DC2626;">Cuarahí</span>
                 </a>
                 
                 <p class="text-white/70 text-lg leading-relaxed mt-6 mb-8 max-w-md description-text">
@@ -83,15 +80,15 @@
                 <div class="column-content">
                     <h3 class="column-title">Espacios</h3>
                     <div class="footer-links">
-                        <a href="/makerspace" class="footer-link" data-color="#ffbc0d">
+                        <a href="/makerspace" class="footer-link" data-color="#DC2626">
                             <span class="link-text">MakerSpace</span>
                             <div class="link-indicator"></div>
                         </a>
-                        <a href="/devspace" class="footer-link" data-color="#ff5200">
+                        <a href="/devspace" class="footer-link" data-color="#DC2626">
                             <span class="link-text">DevSpace</span>
                             <div class="link-indicator"></div>
                         </a>
-                        <a href="/eduspace" class="footer-link" data-color="#3b82f6">
+                        <a href="/eduspace" class="footer-link" data-color="#DC2626">
                             <span class="link-text">EduSpace</span>
                             <div class="link-indicator"></div>
                         </a>
@@ -177,9 +174,9 @@
 .footer-gradient-line {
     background: linear-gradient(90deg, 
         transparent, 
-        rgba(255, 82, 0, 0.5), 
-        rgba(59, 130, 246, 0.5), 
-        rgba(255, 188, 13, 0.5), 
+        rgba(220, 38, 38, 0.5), 
+        rgba(255, 107, 26, 0.4), 
+        rgba(255, 184, 0, 0.3), 
         transparent
     );
     animation: gradientMove 10s infinite linear;
@@ -237,14 +234,14 @@
 .particle-1 {
     top: 10%;
     left: 10%;
-    background: rgba(255, 82, 0, 0.5);
+    background: rgba(220, 38, 38, 0.5);
     animation-delay: -5s;
 }
 
 .particle-2 {
     top: 20%;
     right: 20%;
-    background: rgba(59, 130, 246, 0.5);
+    background: rgba(255, 107, 26, 0.5);
     animation-delay: -2s;
 }
 
@@ -265,7 +262,7 @@
 .particle-5 {
     top: 80%;
     right: 40%;
-    background: rgba(255, 82, 0, 0.5);
+    background: rgba(220, 38, 38, 0.5);
     animation-delay: -15s;
 }
 
@@ -340,21 +337,21 @@
     width: 48px;
     height: 48px;
     border-radius: 12px;
-    background: rgba(255, 82, 0, 0.1);
+    background: rgba(220, 38, 38, 0.1);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    border: 1px solid rgba(255, 82, 0, 0.2);
+    border: 1px solid rgba(220, 38, 38, 0.2);
     overflow: hidden;
 }
 
 .logo-aura {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at center, rgba(255, 82, 0, 0.3), transparent 70%);
+    background: radial-gradient(circle at center, rgba(220, 38, 38, 0.3), transparent 70%);
     opacity: 0.5;
     transition: opacity 0.3s ease;
 }
@@ -363,9 +360,10 @@
     opacity: 0.8;
 }
 
-.logo-svg {
-    width: 30px;
-    height: 30px;
+.logo-img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
     position: relative;
     z-index: 1;
 }
@@ -380,7 +378,7 @@
 .description-text {
     position: relative;
     padding-left: 12px;
-    border-left: 2px solid rgba(255, 82, 0, 0.3);
+    border-left: 2px solid rgba(220, 38, 38, 0.3);
 }
 
 /* Iconos sociales con efectos avanzados */
@@ -417,8 +415,8 @@
 }
 
 .social-icon:hover .icon-bg {
-    background: rgba(255, 82, 0, 0.15);
-    border-color: rgba(255, 82, 0, 0.3);
+    background: rgba(220, 38, 38, 0.15);
+    border-color: rgba(220, 38, 38, 0.3);
 }
 
 .icon-svg {
@@ -437,7 +435,7 @@
 .icon-glow {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at center, rgba(255, 82, 0, 0.3), transparent 70%);
+    background: radial-gradient(circle at center, rgba(220, 38, 38, 0.3), transparent 70%);
     opacity: 0;
     transition: opacity 0.3s ease;
 }
@@ -485,7 +483,7 @@
     left: 0;
     width: 40px;
     height: 2px;
-    background: linear-gradient(90deg, rgba(255, 82, 0, 0.8), transparent);
+    background: linear-gradient(90deg, rgba(220, 38, 38, 0.8), transparent);
 }
 
 /* Enlaces del footer con efectos */
@@ -541,7 +539,7 @@
 }
 
 .heart {
-    color: #ff5200;
+    color: #DC2626;
     display: inline-block;
     animation: heartbeat 2s infinite;
 }
@@ -576,7 +574,7 @@
         padding-left: 0;
         border-left: none;
         padding-top: 12px;
-        border-top: 2px solid rgba(255, 82, 0, 0.3);
+        border-top: 2px solid rgba(220, 38, 38, 0.3);
     }
 }
 </style>

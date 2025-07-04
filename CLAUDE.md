@@ -22,13 +22,15 @@ Note: This project requires Node.js >= 18.20.8. Current issues with Node.js 18.1
 - **Deployment**: Vercel with static output
 - **TypeScript**: Enabled with strict checking
 
-### Design System: "Eco-Style"
-The project uses a cohesive design system inspired by eco.com with:
-- **Glassmorphism**: Extensive use of backdrop-filter and rgba backgrounds
-- **Color Palette**: Blue (#3b82f6), Orange (#f97316), Yellow (#fbbf24) with dark navy backgrounds
-- **Brand Colors**: Custom Cuarahí colors (red: #FF4A1C, orange: #FF6B1A, yellow: #FFB800)
-- **Typography**: Lexend Deca font with responsive clamp() sizing
-- **Animations**: Smooth transitions, parallax effects, and floating elements
+### Design System: "Cuarahí Brand System"
+The project uses a modern glassmorphism design system with the new Cuarahí brand identity:
+- **Glassmorphism**: Extensive use of backdrop-filter and rgba backgrounds for premium feel
+- **Primary Brand Color**: Red (#DC2626) - Main brand color for primary elements
+- **Secondary Brand Colors**: Orange (#FF6B1A), Yellow (#FFB800) - Supporting brand colors
+- **Support Colors**: Blue (#3b82f6) for accents, White/transparent for glassmorphism
+- **Logo Assets**: Uses `logo-blanco.webp` (white logo) throughout components
+- **Typography**: Inter font with responsive clamp() sizing and white text with subtle glows
+- **Animations**: Linear.app-inspired animations, smooth transitions, and luminous effects
 
 ### Component Architecture
 
@@ -37,9 +39,11 @@ The project uses a cohesive design system inspired by eco.com with:
 - Pages are composed of section-based components
 
 **Key Component Patterns**:
-- **SpaceCard.astro**: Reusable card component with color theming (yellow/orange/red variants)
-- **Section Components**: Hero, AboutSection, SpacesSection, ContactSection - each self-contained with their own animations
-- **NavBar.astro**: Fixed navbar with glassmorphism, mobile menu, and banner integration
+- **SpaceCard.astro**: Unified neutral card design with red accent glow effects on titles, icons, and arrows
+- **Hero.astro**: Linear.app-inspired design with glowing logo orb and red-focused gradient animations
+- **Section Components**: Hero, AboutSection, SpacesSection, ContactSection - each using consistent brand colors
+- **NavBar.astro**: Fixed navbar with glassmorphism, uses logo-blanco.webp, red accent colors
+- **Footer.astro**: Comprehensive footer with logo-blanco.webp and red brand color integration
 
 **Global Scripts Location**: 
 - Primary interactive scripts are in `Layout.astro` (lines 55-190)
@@ -89,11 +93,23 @@ Follow the established pattern for Intersection Observer animations:
 - **Tailwind Integration**: Used alongside custom CSS, not as replacement
 
 ### Design System Variables
-Key CSS custom properties defined in `:root`:
-- Colors: `--eco-blue`, `--eco-orange`, `--eco-yellow` 
-- Glassmorphism: `--eco-glass`, `--eco-glass-border`, `--eco-glass-hover`
-- Spacing: `--space-xs` through `--space-3xl`
-- Transitions: `--transition-smooth`, `--transition-bounce`
+Key CSS custom properties defined in `:root` (`src/styles/global.css`):
+
+**Cuarahí Brand Colors**:
+- `--cuarahi-red`: #DC2626 (Primary brand color)
+- `--cuarahi-red-light`: #EF4444, `--cuarahi-red-dark`: #B91C1C
+- `--cuarahi-orange`: #FF6B1A (Secondary brand color)
+- `--cuarahi-orange-light`: #FF8B3D, `--cuarahi-orange-dark`: #E55A0F
+- `--cuarahi-yellow`: #FFB800 (Accent color)
+- `--cuarahi-yellow-light`: #FFC933, `--cuarahi-yellow-dark`: #E6A500
+
+**Glassmorphism & Layout**:
+- `--cuarahi-glass`: rgba(255, 255, 255, 0.1)
+- `--cuarahi-glass-border`: rgba(255, 255, 255, 0.2)
+- `--cuarahi-glass-hover`: rgba(255, 255, 255, 0.15)
+- `--cuarahi-space-xs` through `--cuarahi-space-3xl`
+
+**Legacy Compatibility**: Maintains `--eco-*` aliases for smooth transition
 
 ### Responsive Patterns
 - Use `clamp()` for fluid typography
@@ -115,12 +131,60 @@ Key CSS custom properties defined in `:root`:
 - CSS preprocessing with autoprefixer
 - Reduced motion accessibility support
 
+## Logo & Asset Management
+
+### Logo Implementation
+- **Primary Logo**: `/public/assets/logo-blanco.webp` (white version for dark backgrounds)
+- **Usage Pattern**: Consistent sizing and styling across components
+- **Hero Logo**: Special glowing orb treatment with rotating gradients
+- **NavBar Logo**: 20px standard size, 18px mobile, glassmorphism container
+- **Footer Logo**: 32px size with enhanced glow effects
+
+### Logo Styling Guidelines
+```css
+/* Standard logo implementation */
+.logo-img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+/* With glow effects */
+.logo-with-glow {
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.4));
+}
+```
+
 ## Content Management
 
 ### Page Structure
 - **Homepage**: Single index.astro with all major sections
 - **MakerSpace**: Dedicated page with detailed equipment, workshops, pricing
-- **Brand Assets**: SVG logo in multiple locations (Hero, NavBar, public/assets)
+- **Brand Assets**: Uses `logo-blanco.webp` consistently across Hero, NavBar, Footer components
+- **Logo Implementation**: White logo with glow effects and glassmorphism containers
 
 ### Data Patterns
 Component props are defined inline with TypeScript interfaces. No external CMS or data layer currently implemented.
+
+## Brand Color Migration (2025)
+
+### Color System Evolution
+The project migrated from an eco.com-inspired color system to a unified Cuarahí brand system:
+
+**Before**: Mixed color theming with yellow/orange/blue variations per component
+**After**: Unified red-primary system with neutral components and consistent brand accents
+
+### Key Migration Changes
+1. **Global Colors** (`src/styles/global.css`): Complete rebrand to `--cuarahi-*` variables
+2. **Tailwind Config** (`tailwind.config.js`): Updated with full Cuarahí color palette
+3. **Component Updates**:
+   - **Hero**: Linear-inspired design with red-focused orb gradients
+   - **SpaceCard**: Neutral glassmorphism with red accent glows
+   - **NavBar/Footer**: logo-blanco.webp implementation with red brand colors
+4. **Logo Assets**: Standardized on `logo-blanco.webp` replacing inline SVGs
+
+### Implementation Notes
+- **Backward Compatibility**: Legacy `--eco-*` variables aliased to new `--cuarahi-*` system
+- **Glow Effects**: Title, icon, and interactive element glows using CSS drop-shadow and text-shadow
+- **Glassmorphism**: Enhanced with red accent tints while maintaining neutral base
+- **Brand Consistency**: Red (#DC2626) used consistently for primary actions and accents

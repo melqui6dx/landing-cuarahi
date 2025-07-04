@@ -4,49 +4,92 @@
 /* ===== FUENTE LEXEND DECA ===== */
 @import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-/* ===== VARIABLES GLOBALES ECO-STYLE ===== */
+/* ===== VARIABLES GLOBALES CUARAHÍ BRAND ===== */
 :root {
-  /* Colores principales - Eco.com inspired */
-  --eco-primary-bg: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #0d1117 100%);
-  --eco-secondary-bg: rgba(26, 35, 50, 0.8);
-  --eco-surface-bg: rgba(255, 255, 255, 0.05);
+  /* Colores principales - Cuarahí Brand */
+  --cuarahi-primary-bg: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #0d1117 100%);
+  --cuarahi-secondary-bg: rgba(26, 35, 50, 0.8);
+  --cuarahi-surface-bg: rgba(255, 255, 255, 0.05);
   
   /* Glassmorphism */
-  --eco-glass: rgba(255, 255, 255, 0.1);
-  --eco-glass-border: rgba(255, 255, 255, 0.2);
-  --eco-glass-hover: rgba(255, 255, 255, 0.15);
+  --cuarahi-glass: rgba(255, 255, 255, 0.1);
+  --cuarahi-glass-border: rgba(255, 255, 255, 0.2);
+  --cuarahi-glass-hover: rgba(255, 255, 255, 0.15);
   
-  /* Colores de acento adaptados */
-  --eco-blue: #3b82f6;
-  --eco-blue-light: #60a5fa;
-  --eco-blue-dark: #1e40af;
-  --eco-orange: #f97316;
-  --eco-orange-light: #fb923c;
-  --eco-orange-dark: #ea580c;
-  --eco-yellow: #fbbf24;
-  --eco-yellow-light: #fcd34d;
-  --eco-yellow-dark: #d97706;
+  /* Colores de marca Cuarahí - Sistema Azul/Rojo */
+  /* Colores primarios - Rojo */
+  --cuarahi-red: #DC2626;
+  --cuarahi-red-light: #EF4444;
+  --cuarahi-red-dark: #B91C1C;
+  --cuarahi-red-accent: #F87171;
+  
+  /* Colores secundarios - Azul */
+  --cuarahi-blue: #1E40AF;
+  --cuarahi-blue-light: #3B82F6;
+  --cuarahi-blue-dark: #1E3A8A;
+  --cuarahi-blue-accent: #60A5FA;
+  
+  /* Colores de apoyo - Armonía Azul/Rojo */
+  --cuarahi-cyan: #0EA5E9;
+  --cuarahi-cyan-light: #38BDF8;
+  --cuarahi-cyan-dark: #0284C7;
+  --cuarahi-indigo: #6366F1;
+  --cuarahi-indigo-light: #818CF8;
+  --cuarahi-indigo-dark: #4F46E5;
+  --cuarahi-purple: #8B5CF6;
+  --cuarahi-purple-light: #A78BFA;
+  --cuarahi-purple-dark: #7C3AED;
   
   /* Textos */
-  --eco-text-primary: #ffffff;
-  --eco-text-secondary: rgba(255, 255, 255, 0.8);
-  --eco-text-muted: rgba(255, 255, 255, 0.6);
-  --eco-text-accent: var(--eco-blue-light);
+  --cuarahi-text-primary: #ffffff;
+  --cuarahi-text-secondary: rgba(255, 255, 255, 0.8);
+  --cuarahi-text-muted: rgba(255, 255, 255, 0.6);
+  --cuarahi-text-accent-red: var(--cuarahi-red-light);
+  --cuarahi-text-accent-blue: var(--cuarahi-blue-light);
+  --cuarahi-text-accent: var(--cuarahi-blue-light);
   
   /* Sombras y efectos */
-  --eco-shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.3);
-  --eco-shadow-elevated: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
-  --eco-shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.2);
-  --eco-shadow-glow: 0 0 20px rgba(59, 130, 246, 0.3);
+  --cuarahi-shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --cuarahi-shadow-elevated: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+  --cuarahi-shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.2);
+  --cuarahi-shadow-glow-red: 0 0 20px rgba(220, 38, 38, 0.3);
+  --cuarahi-shadow-glow-blue: 0 0 20px rgba(30, 64, 175, 0.3);
+  --cuarahi-shadow-glow: var(--cuarahi-shadow-glow-blue);
+  
+  /* Compatibilidad con variables antiguas (temporal) */
+  --eco-primary-bg: var(--cuarahi-primary-bg);
+  --eco-glass: var(--cuarahi-glass);
+  --eco-glass-border: var(--cuarahi-glass-border);
+  --eco-glass-hover: var(--cuarahi-glass-hover);
+  --eco-blue: var(--cuarahi-blue);
+  --eco-blue-light: var(--cuarahi-blue-light);
+  --eco-orange: var(--cuarahi-red); /* Orange role → Red */
+  --eco-orange-light: var(--cuarahi-red-light);
+  --eco-yellow: var(--cuarahi-cyan); /* Yellow role → Cyan */
+  --eco-text-primary: var(--cuarahi-text-primary);
+  --eco-text-secondary: var(--cuarahi-text-secondary);
+  --eco-text-muted: var(--cuarahi-text-muted);
+  --eco-shadow-glass: var(--cuarahi-shadow-glass);
+  --eco-shadow-elevated: var(--cuarahi-shadow-elevated);
+  --eco-shadow-glow: var(--cuarahi-shadow-glow);
   
   /* Espaciado consistente */
-  --space-xs: 0.5rem;
-  --space-sm: 1rem;
-  --space-md: 1.5rem;
-  --space-lg: 2rem;
-  --space-xl: 3rem;
-  --space-2xl: 4rem;
-  --space-3xl: 6rem;
+  --cuarahi-space-xs: 0.5rem;
+  --cuarahi-space-sm: 1rem;
+  --cuarahi-space-md: 1.5rem;
+  --cuarahi-space-lg: 2rem;
+  --cuarahi-space-xl: 3rem;
+  --cuarahi-space-2xl: 4rem;
+  --cuarahi-space-3xl: 6rem;
+  
+  /* Compatibilidad con espaciado anterior */
+  --space-xs: var(--cuarahi-space-xs);
+  --space-sm: var(--cuarahi-space-sm);
+  --space-md: var(--cuarahi-space-md);
+  --space-lg: var(--cuarahi-space-lg);
+  --space-xl: var(--cuarahi-space-xl);
+  --space-2xl: var(--cuarahi-space-2xl);
+  --space-3xl: var(--cuarahi-space-3xl);
   
   /* Radios */
   --radius-sm: 8px;
@@ -143,9 +186,9 @@ body::before {
   line-height: 1.4;
 }
 
-/* Gradientes de texto estilo Eco */
+/* Gradientes de texto estilo Cuarahí - Sistema Azul/Rojo */
 .text-gradient {
-  background: linear-gradient(135deg, var(--eco-blue) 0%, var(--eco-orange) 50%, var(--eco-yellow) 100%);
+  background: linear-gradient(135deg, var(--cuarahi-blue) 0%, var(--cuarahi-red) 50%, var(--cuarahi-cyan) 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -154,14 +197,28 @@ body::before {
 }
 
 .text-gradient-blue {
-  background: linear-gradient(135deg, var(--eco-blue) 0%, var(--eco-blue-light) 100%);
+  background: linear-gradient(135deg, var(--cuarahi-blue) 0%, var(--cuarahi-blue-light) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-red {
+  background: linear-gradient(135deg, var(--cuarahi-red) 0%, var(--cuarahi-red-light) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-cool {
+  background: linear-gradient(135deg, var(--cuarahi-blue) 0%, var(--cuarahi-cyan) 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .text-gradient-warm {
-  background: linear-gradient(135deg, var(--eco-orange) 0%, var(--eco-yellow) 100%);
+  background: linear-gradient(135deg, var(--cuarahi-red) 0%, var(--cuarahi-purple) 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -214,7 +271,7 @@ body::before {
 }
 
 .nav-brand:hover {
-  color: var(--eco-blue-light);
+  color: var(--cuarahi-blue-light);
 }
 
 .nav-links {
@@ -248,7 +305,7 @@ body::before {
   left: 50%;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, var(--eco-blue), var(--eco-orange));
+  background: linear-gradient(90deg, var(--cuarahi-blue), var(--cuarahi-red));
   transition: var(--transition-smooth);
   transform: translateX(-50%);
 }
@@ -272,15 +329,15 @@ body::before {
   position: relative;
   overflow: hidden;
   transition: var(--transition-smooth);
-  background: linear-gradient(135deg, var(--eco-blue), var(--eco-orange));
+  background: linear-gradient(135deg, var(--cuarahi-blue), var(--cuarahi-red));
   color: white;
-  box-shadow: var(--eco-shadow-subtle);
+  box-shadow: var(--cuarahi-shadow-subtle);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: var(--eco-shadow-elevated);
-  background: linear-gradient(135deg, var(--eco-blue-light), var(--eco-orange-light));
+  box-shadow: var(--cuarahi-shadow-elevated);
+  background: linear-gradient(135deg, var(--cuarahi-blue-light), var(--cuarahi-red-light));
 }
 
 .btn-secondary {
@@ -355,7 +412,7 @@ body::before {
   left: -100%;
   width: 100%;
   height: 2px;
-  background: linear-gradient(90deg, var(--eco-blue), var(--eco-orange), var(--eco-yellow));
+  background: linear-gradient(90deg, var(--cuarahi-blue), var(--cuarahi-red), var(--cuarahi-cyan));
   transition: var(--transition-slow);
 }
 
@@ -374,30 +431,30 @@ body::before {
 }
 
 .space-card-makerspace {
-  border-color: rgba(59, 130, 246, 0.3);
-  background: linear-gradient(135deg, var(--eco-glass), rgba(59, 130, 246, 0.05));
+  border-color: rgba(30, 64, 175, 0.3);
+  background: linear-gradient(135deg, var(--cuarahi-glass), rgba(30, 64, 175, 0.05));
 }
 
 .space-card-makerspace:hover {
-  box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.2);
+  box-shadow: 0 20px 25px -5px rgba(30, 64, 175, 0.2);
 }
 
 .space-card-devspace {
-  border-color: rgba(249, 115, 22, 0.3);
-  background: linear-gradient(135deg, var(--eco-glass), rgba(249, 115, 22, 0.05));
+  border-color: rgba(220, 38, 38, 0.3);
+  background: linear-gradient(135deg, var(--cuarahi-glass), rgba(220, 38, 38, 0.05));
 }
 
 .space-card-devspace:hover {
-  box-shadow: 0 20px 25px -5px rgba(249, 115, 22, 0.2);
+  box-shadow: 0 20px 25px -5px rgba(220, 38, 38, 0.2);
 }
 
 .space-card-eduspace {
-  border-color: rgba(251, 191, 36, 0.3);
-  background: linear-gradient(135deg, var(--eco-glass), rgba(251, 191, 36, 0.05));
+  border-color: rgba(14, 165, 233, 0.3);
+  background: linear-gradient(135deg, var(--cuarahi-glass), rgba(14, 165, 233, 0.05));
 }
 
 .space-card-eduspace:hover {
-  box-shadow: 0 20px 25px -5px rgba(251, 191, 36, 0.2);
+  box-shadow: 0 20px 25px -5px rgba(14, 165, 233, 0.2);
 }
 
 /* ===== ICONOS FLOTANTES ===== */
@@ -421,21 +478,21 @@ body::before {
 }
 
 .icon-float-makerspace {
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.1));
-  border: 1px solid rgba(59, 130, 246, 0.3);
-  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.2);
+  background: linear-gradient(135deg, rgba(30, 64, 175, 0.2), rgba(30, 64, 175, 0.1));
+  border: 1px solid rgba(30, 64, 175, 0.3);
+  box-shadow: 0 8px 32px rgba(30, 64, 175, 0.2);
 }
 
 .icon-float-devspace {
-  background: linear-gradient(135deg, rgba(249, 115, 22, 0.2), rgba(249, 115, 22, 0.1));
-  border: 1px solid rgba(249, 115, 22, 0.3);
-  box-shadow: 0 8px 32px rgba(249, 115, 22, 0.2);
+  background: linear-gradient(135deg, rgba(220, 38, 38, 0.2), rgba(220, 38, 38, 0.1));
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  box-shadow: 0 8px 32px rgba(220, 38, 38, 0.2);
 }
 
 .icon-float-eduspace {
-  background: linear-gradient(135deg, rgba(251, 191, 36, 0.2), rgba(251, 191, 36, 0.1));
-  border: 1px solid rgba(251, 191, 36, 0.3);
-  box-shadow: 0 8px 32px rgba(251, 191, 36, 0.2);
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.2), rgba(14, 165, 233, 0.1));
+  border: 1px solid rgba(14, 165, 233, 0.3);
+  box-shadow: 0 8px 32px rgba(14, 165, 233, 0.2);
 }
 
 @keyframes float-gentle {
@@ -510,10 +567,10 @@ body::before {
 }
 
 .social-icon:hover {
-  background: var(--eco-glass-hover);
-  color: var(--eco-text-primary);
+  background: var(--cuarahi-glass-hover);
+  color: var(--cuarahi-text-primary);
   transform: translateY(-2px);
-  box-shadow: var(--eco-shadow-glow);
+  box-shadow: var(--cuarahi-shadow-glow);
 }
 
 .social-icon svg {
@@ -1001,7 +1058,7 @@ footer {
 .btn-primary:focus,
 .btn-secondary:focus,
 .social-icon:focus {
-  outline: 2px solid var(--eco-blue);
+  outline: 2px solid var(--cuarahi-blue);
   outline-offset: 2px;
 }
 
@@ -1042,8 +1099,8 @@ footer {
     transition: none !important;
   }
   
-  .gradient-text-eco {
-    background: linear-gradient(135deg, var(--eco-blue) 0%, var(--eco-orange) 50%, var(--eco-yellow) 100%);
+  .gradient-text-cuarahi {
+    background: linear-gradient(135deg, var(--cuarahi-blue) 0%, var(--cuarahi-red) 50%, var(--cuarahi-cyan) 100%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
